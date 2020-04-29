@@ -1,4 +1,18 @@
 package eshop.valueobjects;
 
-public class Mitarbeiter {
+public class Mitarbeiter extends Nutzer {
+
+
+    public Mitarbeiter(String vorname, String nachname, String login, String passwort, int nummer, boolean isMitarbeiter) {
+        super(vorname, nachname, login, passwort, nummer, isMitarbeiter);
+    }
+
+    public void artikelAnlegen(Artikel a) {
+        // TODO: einen neuen Artikel im Shop anlegen
+    }
+
+    public void bestandAnpassen(Artikel a) {
+        // TODO: Bestand eines Artikels anpassen
+    }
+
 }

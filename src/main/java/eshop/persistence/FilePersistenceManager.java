@@ -5,7 +5,7 @@ import eshop.valueobjects.Artikel;
 import java.io.*;
 import java.nio.Buffer;
 
-public class FilePersistenceManager {
+public class FilePersistenceManager implements PersistenceManager {
 
     BufferedReader reader = null;
     PrintWriter writer = null;
@@ -46,10 +46,13 @@ public class FilePersistenceManager {
         String stringNummer = liesZeile();
         int nummer = Integer.parseInt(stringNummer);
 
+        String stringBestand = liesZeile();
+        int bestand = Integer.parseInt(stringBestand);
+
         String verfuegbarCode = liesZeile();
         boolean verfuegbar = verfuegbarCode.equals("t") ? true : false;
 
-        return new Artikel(nummer, bezeichnung, marke, verfuegbar);
+        return new Artikel(nummer, bestand, bezeichnung, marke, verfuegbar);
 
     }
 
@@ -57,6 +60,7 @@ public class FilePersistenceManager {
         schreibeZeile(a.getBezeichnung());
         schreibeZeile(a.getMarke());
         schreibeZeile(a.getNummer() + "");
+        schreibeZeile(a.getBestand() + "");
 
         if (a.isVerfuegbar()) {
             schreibeZeile("t");
