@@ -64,7 +64,6 @@ public class NutzerVerwaltung {
 
     //Suche nach Kunde
     private Kunde sucheNachLogin(String login) throws LoginFehlgeschlagenException {
-        System.out.println("Alle Nutzer: " + alleKunden.size());
         for (Kunde kunde : alleKunden) {
             if (kunde.getLogin().equals(login)) {
                 return kunde;
@@ -75,7 +74,6 @@ public class NutzerVerwaltung {
 
     //Suche nach Mitarbeiter
     private Mitarbeiter sucheNachLogin(String login, boolean isMitarbeiter) throws LoginFehlgeschlagenException {
-        System.out.println("Alle Mitarbeiter: " + alleMitarbeiter.size());
         for (Mitarbeiter mitarbeiter : alleMitarbeiter) {
             if (mitarbeiter.getLogin().equals(login) && mitarbeiter.isMitarbeiter() == isMitarbeiter) {
                 return mitarbeiter;

@@ -1,6 +1,5 @@
 package eshop.ui.cui;
 
-import eshop.domain.NutzerVerwaltung;
 import eshop.domain.Shop;
 import eshop.domain.exceptions.ArtikelExistiertBereitsException;
 import eshop.domain.exceptions.BenutzerExistiertBereitsException;
@@ -31,10 +30,10 @@ public class ShopCUI {
     }
 
     private void gibMenueAus() {
-        if(eingeloggterNutzer == null) {
+        if(eingeloggterMitarbeiter == null && eingeloggterKunde == null) {
             gibAusgeloggtesMenueAus();
         }
-        else if(eingeloggterNutzer instanceof Mitarbeiter) {
+        else if(eingeloggterMitarbeiter != null) {
             gibMitarbeiterMenueAus();
         } else {
             gibShopMenueAus();
@@ -50,6 +49,7 @@ public class ShopCUI {
         System.out.print("         \n  Mitarbeiter erstellen:  't'");
         System.out.print("         \n  Daten sichern:  's'");
         System.out.print("         \n  ---------------------");
+        System.out.print("         \n  Nutzer ausloggen  'x'");
         System.out.println("         \n  Beenden:        'q'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
@@ -61,6 +61,7 @@ public class ShopCUI {
         System.out.print("         \n  Warenkorb ausgeben: 'm'");
         System.out.print("         \n  Bezahlen:  's'");
         System.out.print("         \n  ---------------------");
+        System.out.print("         \n  Nutzer ausloggen:  'x'");
         System.out.println("         \n  Beenden:        'q'");
         System.out.print("> "); // Prompt
         System.out.flush(); // ohne NL ausgeben
@@ -80,8 +81,26 @@ public class ShopCUI {
         return in.readLine();
     }
 
-    private void verarbeiteEingeloggteEingabe(String line) throws IOException {
-        // TODO: Eingabeverarbeitung
+    private void verarbeiteShopMenueEingabe(String line) throws IOException {
+        Vector liste;
+        switch (line) {
+            case "a":
+                // Artikel ausgeben
+                liste = shop.gibAlleArtikel();
+                gibArtikellisteAus(liste);
+                break;
+            case "w":
+                //TODO: Artikel in den Warenkorb legen
+                break;
+            case "m":
+                //TODO: Warenkorb ausgeben
+                break;
+            case "s":
+                //TODO: Rechnung ausgeben
+                break;
+            case "x":
+                eingeloggterKunde = null;
+        }
     }
 
     private void verarbeiteAusgeloggteEingabe(String line) throws IOException {
@@ -213,16 +232,19 @@ public class ShopCUI {
                 } catch (BenutzerExistiertBereitsException e) {
                     System.out.println(e.getMessage());
                 }
+            case "x":
+                eingeloggterMitarbeiter = null;
+                System.out.println("Nutzer wurde ausgeloggt");
         }
     }
 
     public void verarbeiteEingabe(String line) throws IOException {
-        if (eingeloggterNutzer == null) {
+        if (eingeloggterMitarbeiter == null && eingeloggterKunde == null) {
             verarbeiteAusgeloggteEingabe(line);
-        } else if (eingeloggterNutzer instanceof Mitarbeiter) {
+        } else if (eingeloggterMitarbeiter != null) {
             verarbeiteMitarbeiterEingabe(line);
         } else {
-            verarbeiteEingeloggteEingabe(line);
+            verarbeiteShopMenueEingabe(line);
         }
     }
 
