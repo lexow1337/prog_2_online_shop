@@ -3,8 +3,8 @@ package eshop.valueobjects;
 public class Mitarbeiter extends Nutzer {
 
 
-    public Mitarbeiter(String vorname, String nachname, String login, String passwort, int nummer, boolean isMitarbeiter) {
-        super(vorname, nachname, login, passwort, nummer, isMitarbeiter);
+    public Mitarbeiter(String vorname, String nachname, String login, String passwort, int nummer) {
+        super(vorname, nachname, login, passwort, nummer);
     }
 
     public void artikelAnlegen(Artikel a) {
@@ -15,4 +15,8 @@ public class Mitarbeiter extends Nutzer {
         // TODO: Bestand eines Artikels anpassen
     }
 
+    @Override
+    public boolean isMitarbeiter() {
+        return super.isMitarbeiter();
+    }
 }
