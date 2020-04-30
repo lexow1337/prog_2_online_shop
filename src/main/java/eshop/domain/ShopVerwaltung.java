@@ -74,23 +74,8 @@ public class ShopVerwaltung {
         return suchErg;
     }
 
-    /**
-     * Methode, die eine KOPIE des Bücherbestands zurückgibt.
-     * (Eine Kopie ist eine gute Idee, wenn ich dem Empfänger
-     * der Daten nicht ermöglichen möchte, die Original-Daten
-     * zu manipulieren.)
-     * ACHTUNG: die in der kopierten Bücherliste referenzierten
-     * 			sind nicht kopiert worden, d.h. ursprüngliche
-     * 			Bücherliste und ihre Kopie verweisen auf dieselben
-     * 			Buch-Objekte.
-     *
-     * @return Liste aller Artikel im Artikelbestand (Kopie)
-     */
     public Vector getArtikelBestand() {
         return new Vector(artikelBestand);
     }
-
-    // TODO: Weitere Methoden, z.B. zum Auslesen und Entfernen von Büchern
-    // ...
 
 }

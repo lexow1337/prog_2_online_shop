@@ -1,7 +1,10 @@
 package eshop.ui.cui;
 
+import eshop.domain.NutzerVerwaltung;
 import eshop.domain.Shop;
 import eshop.domain.exceptions.ArtikelExistiertBereitsException;
+import eshop.domain.exceptions.BenutzerExistiertBereitsException;
+import eshop.domain.exceptions.LoginFehlgeschlagenException;
 import eshop.valueobjects.Kunde;
 import eshop.valueobjects.Mitarbeiter;
 import eshop.valueobjects.Nutzer;
@@ -17,6 +20,8 @@ public class ShopCUI {
     private BufferedReader in;
 
     private Nutzer eingeloggterNutzer;
+    private Mitarbeiter eingeloggterMitarbeiter;
+    private Kunde eingeloggterKunde;
 
     public ShopCUI(String datei) throws IOException {
         // die Bib-Verwaltung erledigt die Aufgaben,
@@ -32,18 +37,19 @@ public class ShopCUI {
             gibAusgeloggtesMenueAus();
         }
         else if(eingeloggterNutzer instanceof Mitarbeiter) {
-            // TODO: gib Mitarbeitermenue aus
+            gibMitarbeiterMenueAus();
         } else {
-            // TODO: gib Shop-Menue aus
+            gibShopMenueAus();
         }
     }
 
-    private void gibEingeloggtesMenueAus() {
-        System.out.print("Befehle: \n  Artikel ausgeben:  'a'");
+    private void gibMitarbeiterMenueAus() {
+        System.out.print("\n Befehle: \n  Artikel ausgeben:  'a'");
         System.out.print("         \n  Artikel löschen:  'd'");
         System.out.print("         \n  Artikel einfügen: 'e'");
         System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Artikelmenge ausgeben: 'm'");
+        System.out.print("         \n  Mitarbeiter erstellen:  't'");
         System.out.print("         \n  Daten sichern:  's'");
         System.out.print("         \n  ---------------------");
         System.out.println("         \n  Beenden:        'q'");
@@ -51,8 +57,19 @@ public class ShopCUI {
         System.out.flush(); // ohne NL ausgeben
     }
 
+    private void gibShopMenueAus() {
+        System.out.print("\n Befehle: \n  Artikel anzeigen:  'a'");
+        System.out.print("         \n  Artikel in Warenkorb:  'w'");
+        System.out.print("         \n  Warenkorb ausgeben: 'm'");
+        System.out.print("         \n  Bezahlen:  's'");
+        System.out.print("         \n  ---------------------");
+        System.out.println("         \n  Beenden:        'q'");
+        System.out.print("> "); // Prompt
+        System.out.flush(); // ohne NL ausgeben
+    }
+
     private void gibAusgeloggtesMenueAus() {
-        System.out.print("Befehle: \n   Login: 'l'");
+        System.out.print("\n Befehle: \n   Login: 'l'");
         System.out.print("         \n   Registrieren: 'r'");
         System.out.print("         \n  ---------------------");
         System.out.println("         \n  Beenden:        'q'");
@@ -65,15 +82,56 @@ public class ShopCUI {
         return in.readLine();
     }
 
-    private void verarbeiteEingeloggteEingabe() throws IOException {
+    private void verarbeiteEingeloggteEingabe(String line) throws IOException {
         // TODO: Eingabeverarbeitung
     }
 
-    private void verarbeiteAusgeloggteEingabe() throws IOException {
-        // TODO: Eingabeverarbeitung
+    private void verarbeiteAusgeloggteEingabe(String line) throws IOException {
+        String login;
+        String passwort;
+        int nummer;
+
+        switch (line) {
+            //Login verarbeiten
+            case "l":
+                System.out.print("Benutzername > ");
+                login = liesEingabe();
+                System.out.print("Passwort > ");
+                passwort = liesEingabe();
+                try {
+                    eingeloggterKunde = shop.einloggen(login, passwort);
+                    System.out.print(eingeloggterKunde.getLogin() + "wurde eingeloggt.");
+                } catch (LoginFehlgeschlagenException e) {
+                    System.out.print(e.getMessage());
+                }
+                try {
+                    eingeloggterMitarbeiter = shop.einloggen(login, passwort, true);
+                    System.out.print("Der Mitarbeiter " + eingeloggterMitarbeiter.getLogin() + "wurde eingeloggt.");
+                } catch (LoginFehlgeschlagenException e) {
+                    System.out.print(e.getMessage());
+                }
+                break;
+            //Registrierung verarbeiten
+            case "r":
+                System.out.print("Vorname > ");
+                String vorname = liesEingabe();
+                System.out.print("Nachname > ");
+                String nachname = liesEingabe();
+                System.out.print("Benutzername > ");
+                login = liesEingabe();
+                System.out.print("Passwort > ");
+                passwort = liesEingabe();
+                nummer = shop.kundenAnzahl() + 1;
+                try {
+                    //Kunde registrieren
+                    shop.registrieren(vorname, nachname, login, passwort, nummer);
+                } catch (BenutzerExistiertBereitsException e) {
+                    System.out.println(e.getMessage());
+                }
+        }
     }
 
-    private void verarbeiteEingabe(String line) throws IOException {
+    private void verarbeiteMitarbeiterEingabe(String line) throws IOException {
         String nummer;
         int nr;
         String bestand;
@@ -81,6 +139,9 @@ public class ShopCUI {
         String marke;
         String bezeichnung;
         Vector liste;
+        String login;
+        String passwort;
+        boolean isMitarbeiter;
 
         // Eingabe bearbeiten:
         switch (line) {
@@ -136,6 +197,34 @@ public class ShopCUI {
                 break;
             case "s":
                 shop.schreibeArtikel();
+                break;
+            case "t":
+                System.out.print("Vorname > ");
+                String vorname = liesEingabe();
+                System.out.print("Nachname > ");
+                String nachname = liesEingabe();
+                System.out.print("Benutzername > ");
+                login = liesEingabe();
+                System.out.print("Passwort > ");
+                passwort = liesEingabe();
+                nr = shop.mitarbeiterAnzahl() + 1;
+                isMitarbeiter = true;
+                try {
+                    //Kunde registrieren
+                    shop.registrieren(vorname, nachname, login, passwort, nr, isMitarbeiter);
+                } catch (BenutzerExistiertBereitsException e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+    }
+
+    public void verarbeiteEingabe(String line) throws IOException {
+        if (eingeloggterNutzer == null) {
+            verarbeiteAusgeloggteEingabe(line);
+        } else if (eingeloggterNutzer instanceof Mitarbeiter) {
+            verarbeiteMitarbeiterEingabe(line);
+        } else {
+            verarbeiteEingeloggteEingabe(line);
         }
     }
 
