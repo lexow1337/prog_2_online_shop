@@ -4,12 +4,14 @@ import eshop.domain.exceptions.BenutzerExistiertBereitsException;
 import eshop.domain.exceptions.LoginFehlgeschlagenException;
 import eshop.valueobjects.Kunde;
 import eshop.valueobjects.Mitarbeiter;
+import eshop.valueobjects.Nutzer;
 
 import java.util.Vector;
 
 public class NutzerVerwaltung {
 
-    //private Vector alleNutzer = new Vector();
+
+    Vector<Nutzer> alleNutzer = new Vector();
     Vector<Kunde> alleKunden = new Vector();
     Vector<Mitarbeiter> alleMitarbeiter = new Vector();
 
@@ -62,7 +64,7 @@ public class NutzerVerwaltung {
 
     //Suche nach Kunde
     private Kunde sucheNachLogin(String login) throws LoginFehlgeschlagenException {
-        System.out.println(alleKunden.size());
+        System.out.println("Alle Nutzer: " + alleKunden.size());
         for (Kunde kunde : alleKunden) {
             if (kunde.getLogin().equals(login)) {
                 return kunde;
@@ -73,7 +75,7 @@ public class NutzerVerwaltung {
 
     //Suche nach Mitarbeiter
     private Mitarbeiter sucheNachLogin(String login, boolean isMitarbeiter) throws LoginFehlgeschlagenException {
-        System.out.println(alleMitarbeiter.size());
+        System.out.println("Alle Mitarbeiter: " + alleMitarbeiter.size());
         for (Mitarbeiter mitarbeiter : alleMitarbeiter) {
             if (mitarbeiter.getLogin().equals(login) && mitarbeiter.isMitarbeiter() == isMitarbeiter) {
                 return mitarbeiter;

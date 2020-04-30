@@ -24,8 +24,6 @@ public class ShopCUI {
     private Kunde eingeloggterKunde;
 
     public ShopCUI(String datei) throws IOException {
-        // die Bib-Verwaltung erledigt die Aufgaben,
-        // die nichts mit Ein-/Ausgabe zu tun haben
         shop = new Shop(datei);
 
         // Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen

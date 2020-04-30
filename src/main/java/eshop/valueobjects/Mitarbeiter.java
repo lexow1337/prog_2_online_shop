@@ -5,6 +5,7 @@ public class Mitarbeiter extends Nutzer {
 
     public Mitarbeiter(String vorname, String nachname, String login, String passwort, int nummer) {
         super(vorname, nachname, login, passwort, nummer);
+        this.isMitarbeiter = true;
     }
 
     public void artikelAnlegen(Artikel a) {
