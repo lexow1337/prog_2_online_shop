@@ -1,6 +1,6 @@
 package eshop.valueobjects;
 
-public class Nutzer {
+public abstract class Nutzer {
 
     private String vorname;
     private String nachname;
@@ -8,7 +8,7 @@ public class Nutzer {
     private String passwort;
 
     private int nummer;
-    private boolean isMitarbeiter;
+    protected boolean isMitarbeiter;
 
     public Nutzer(String _vorname, String _nachname, String _login, String _passwort, int _nummer) {
         this.vorname = _vorname;
