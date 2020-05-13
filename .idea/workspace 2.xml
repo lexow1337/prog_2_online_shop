@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bf27d4ca-e148-4f01-8e2a-590137ae2097" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/EShopException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/domain/NutzerVerwaltung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/domain/NutzerVerwaltung.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/domain/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/domain/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/ArtikelExistiertBereitsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/ArtikelExistiertBereitsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/BenutzerExistiertBereitsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/BenutzerExistiertBereitsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/LoginFehlgeschlagenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/domain/exceptions/LoginFehlgeschlagenException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/ui/cui/ShopCUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/ui/cui/ShopCUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/valueobjects/Kunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/valueobjects/Kunde.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/valueobjects/Mitarbeiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/valueobjects/Mitarbeiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eshop/valueobjects/Nutzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eshop/valueobjects/Nutzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/NutzerVerwaltung.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/domain/NutzerVerwaltung.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/domain/Shop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/ShopVerwaltung.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/domain/ShopVerwaltung.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/Warenkorb.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/exceptions/ArtikelExistiertBereitsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/domain/exceptions/ArtikelExistiertBereitsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/exceptions/BenutzerExistiertBereitsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/domain/exceptions/BenutzerExistiertBereitsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/domain/exceptions/LoginFehlgeschlagenException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/domain/exceptions/LoginFehlgeschlagenException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/persistence/FilePersistenceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/persistence/FilePersistenceManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/ui/cui/ShopCUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/ui/cui/ShopCUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Artikel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Artikel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Kunde.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Kunde.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Mitarbeiter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Mitarbeiter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Nutzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/eshop/valueobjects/Nutzer.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ZfUyLsoJRGoKg4QB0ptAtbjJQ4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ShopCUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eshop.ui.cui.ShopCUI" />
+      <module name="online_store" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eshop.ui.cui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ShopCUI" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bf27d4ca-e148-4f01-8e2a-590137ae2097" name="Default Changelist" comment="" />
+      <created>1585229895740</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585229895740</updated>
+      <workItem from="1585229898874" duration="83000" />
+      <workItem from="1585230109578" duration="368000" />
+      <workItem from="1585232465569" duration="1093000" />
+      <workItem from="1585267261956" duration="15000" />
+      <workItem from="1587542850731" duration="117000" />
+      <workItem from="1587543005873" duration="188000" />
+      <workItem from="1587543279744" duration="59000" />
+      <workItem from="1587543360925" duration="51000" />
+      <workItem from="1587633442978" duration="21252000" />
+      <workItem from="1588061912399" duration="51251000" />
+      <workItem from="1588236159304" duration="11268000" />
+      <workItem from="1588257029472" duration="199000" />
+      <workItem from="1588272013077" duration="5473000" />
+      <workItem from="1588332124502" duration="283000" />
+      <workItem from="1588424423475" duration="650000" />
+      <workItem from="1588765955736" duration="916000" />
+      <workItem from="1588774367692" duration="2270000" />
+      <workItem from="1589197862695" duration="6395000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="315" y="-958" width="1024" height="823" key="#Project_Structure" timestamp="1587637708028">
+      <screen x="-251" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="315" y="-958" key="#Project_Structure/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1587637708028" />
+    <state x="208" y="23" key="#Project_Structure/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1587635534695" />
+    <state x="208" y="23" width="1024" height="823" key="#Project_Structure/0.23.1440.823@0.23.1440.823" timestamp="1587543385030" />
+    <state x="533" y="157" key="#com.intellij.ide.util.MemberChooser" timestamp="1588775002597">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state x="460" y="-885" key="#com.intellij.ide.util.MemberChooser/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588206362011" />
+    <state x="533" y="157" key="#com.intellij.ide.util.MemberChooser/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1588775002597" />
+    <state x="533" y="157" key="#com.intellij.ide.util.MemberChooser/0.23.1440.823@0.23.1440.823" timestamp="1587975040657" />
+    <state x="248" y="-624" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1587644488063">
+      <screen x="-251" y="-1057" width="1920" height="1003" />
+    </state>
+    <state x="248" y="-624" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1440.877/-251.-1057.1920.1003@-251.-1057.1920.1003" timestamp="1587644488063" />
+    <state x="447" y="-775" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1588188828324">
+      <screen x="-251" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="447" y="-775" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588188828324" />
+    <state width="1398" height="151" key="GridCell.Tab.0.bottom" timestamp="1589208616214">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="939" height="266" key="GridCell.Tab.0.bottom/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588252073370" />
+    <state width="1398" height="151" key="GridCell.Tab.0.bottom/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1589208616214" />
+    <state width="1398" height="136" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1588283230320" />
+    <state width="1398" height="151" key="GridCell.Tab.0.center" timestamp="1589208616213">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="939" height="266" key="GridCell.Tab.0.center/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588252073369" />
+    <state width="1398" height="151" key="GridCell.Tab.0.center/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1589208616213" />
+    <state width="1398" height="136" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1588283230319" />
+    <state width="1398" height="151" key="GridCell.Tab.0.left" timestamp="1589208616213">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="939" height="266" key="GridCell.Tab.0.left/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588252073369" />
+    <state width="1398" height="151" key="GridCell.Tab.0.left/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1589208616213" />
+    <state width="1398" height="136" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1588283230318" />
+    <state width="1398" height="151" key="GridCell.Tab.0.right" timestamp="1589208616214">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state width="939" height="266" key="GridCell.Tab.0.right/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588252073370" />
+    <state width="1398" height="151" key="GridCell.Tab.0.right/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1589208616214" />
+    <state width="1398" height="136" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1588283230320" />
+    <state x="404" y="-930" key="RollbackChangesDialog" timestamp="1587643462692">
+      <screen x="-251" y="-1057" width="1920" height="1003" />
+    </state>
+    <state x="404" y="-930" key="RollbackChangesDialog/0.23.1440.877/-251.-1057.1920.1003@-251.-1057.1920.1003" timestamp="1587643462692" />
+    <state x="238" y="23" width="1024" height="823" key="SettingsEditor" timestamp="1589206309049">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state x="66" y="-813" width="1219" height="761" key="SettingsEditor/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588208822823" />
+    <state x="238" y="23" width="1024" height="823" key="SettingsEditor/0.23.1440.823/-251.-1057.1920.1057@0.23.1440.823" timestamp="1589206309049" />
+    <state x="326" y="83" width="999" height="722" key="SettingsEditor/0.23.1440.823@0.23.1440.823" timestamp="1588151834231" />
+    <state x="447" y="-784" key="extract.method.dialog" timestamp="1588195431546">
+      <screen x="-251" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="447" y="-784" key="extract.method.dialog/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588195431546" />
+    <state x="338" y="36" width="598" height="777" key="find.popup" timestamp="1587711151694">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state x="338" y="36" width="598" height="777" key="find.popup/0.23.1440.823@0.23.1440.823" timestamp="1587711151694" />
+    <state x="469" y="206" width="670" height="527" key="search.everywhere.popup" timestamp="1588281334129">
+      <screen x="0" y="23" width="1440" height="823" />
+    </state>
+    <state x="374" y="-822" width="670" height="676" key="search.everywhere.popup/0.23.1440.823/-251.-1057.1920.1057@-251.-1057.1920.1057" timestamp="1588163494653" />
+    <state x="469" y="206" width="670" height="527" key="search.everywhere.popup/0.23.1440.823@0.23.1440.823" timestamp="1588281334129" />
+  </component>
+</project>

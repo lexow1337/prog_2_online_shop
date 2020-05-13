@@ -7,12 +7,12 @@ public class Kunde extends Nutzer {
     private String plz = "";
     private String ort = "";
 
-    public Kunde(String vorname, String nachname, String login, String passwort, int nummer) {
-        super(vorname, nachname, login, passwort, nummer);
+    public Kunde(String vorname, String nachname, String login, String passwort) {
+        super(vorname, nachname, login, passwort);
     }
 
-    public Kunde(String vorname, String nachname, String login, String passwort, int nummer, String strasse, String hausnr, String plz, String ort) {
-        super(vorname, nachname, login, passwort, nummer);
+    public Kunde(String vorname, String nachname, String login, String passwort, String strasse, String hausnr, String plz, String ort) {
+        super(vorname, nachname, login, passwort);
         this.strasse = strasse;
         this.hausnr = hausnr;
         this.plz = plz;

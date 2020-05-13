@@ -8,15 +8,12 @@ public abstract class Nutzer {
     private String passwort;
 
     private int nummer;
-    protected boolean isMitarbeiter;
 
-    public Nutzer(String _vorname, String _nachname, String _login, String _passwort, int _nummer) {
+    public Nutzer(String _vorname, String _nachname, String _login, String _passwort) {
         this.vorname = _vorname;
         this.nachname = _nachname;
         this.login = _login;
         this.passwort = _passwort;
-        this.nummer = _nummer;
-        this.isMitarbeiter = false;
     }
 
     public String getVorname() {
@@ -59,11 +56,13 @@ public abstract class Nutzer {
         this.nummer = nummer;
     }
 
-    public boolean isMitarbeiter() {
-        return isMitarbeiter;
+    @Override
+    public boolean equals(Object o) {
+        if ((o instanceof Nutzer)) {
+            return ((Nutzer)o).login.equals(login);
+        }
+        return false;
     }
 
-    public void setMitarbeiter(boolean mitarbeiter) {
-        isMitarbeiter = mitarbeiter;
-    }
+    public boolean existiert() { return nummer >= 0; }
 }
