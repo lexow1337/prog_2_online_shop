@@ -1,12 +1,10 @@
 package eshop.domain;
 
 import eshop.domain.exceptions.ArtikelExistiertBereitsException;
+import eshop.domain.exceptions.ArtikelNichtVerfuegbarException;
 import eshop.domain.exceptions.BenutzerExistiertBereitsException;
 import eshop.domain.exceptions.LoginFehlgeschlagenException;
-import eshop.valueobjects.Artikel;
-import eshop.valueobjects.Kunde;
-import eshop.valueobjects.Mitarbeiter;
-import eshop.valueobjects.Nutzer;
+import eshop.valueobjects.*;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -15,7 +13,9 @@ public class Shop {
 
     private String datei = "";
     private ShopVerwaltung meineArtikel;
+    private WarenkorbVerwaltung meinWarenkorb;
     private NutzerVerwaltung meineNutzer;
+    private Nutzer eingeloggterNutzer;
 
     public Shop(String datei) throws IOException {
         this.datei = datei;
@@ -23,6 +23,11 @@ public class Shop {
         meineArtikel.liesDaten(datei+"_S.txt");
 
         meineNutzer = new NutzerVerwaltung();
+        meinWarenkorb = new WarenkorbVerwaltung(meineNutzer, meineArtikel);
+    }
+
+    public Nutzer getEingeloggterNutzer(){
+        return eingeloggterNutzer;
     }
 
     public Vector gibAlleArtikel() {
@@ -33,14 +38,19 @@ public class Shop {
         return meineArtikel.getArtikelBestand().size();
     }
 
-    public Vector sucheNachBezeichnung(String bezeichnung) {
+    public Vector<Artikel> sucheNachBezeichnung(String bezeichnung) {
         return meineArtikel.sucheArtikel(bezeichnung);
     }
 
-    public Artikel fuegeArtikelEin(String bezeichnung, String marke, int bestand, int nummer) throws ArtikelExistiertBereitsException {
+    public Artikel fuegeArtikelEin(String bezeichnung, String marke, int bestand) throws ArtikelExistiertBereitsException {
+        int nummer = artikelMenge() + 1;
         Artikel a = new Artikel(nummer, bestand, bezeichnung, marke);
         meineArtikel.einfuegen(a);
         return a;
+    }
+
+    public Artikel getArtikel(String bezeichnung) {
+        return null;
     }
 
     public void loescheArtikel(String bezeichnung, String marke, int bestand, int nummer) {
@@ -53,33 +63,29 @@ public class Shop {
     }
 
     //Anzahl der Mitarbeiter zurückgeben
-    public int mitarbeiterAnzahl() {
-        return meineNutzer.alleMitarbeiter.size();
+    public int nutzerAnzahl() {
+        return meineNutzer.alleNutzer.size();
     }
 
-    //Anzahl der Kunden zurückgeben
-    public int kundenAnzahl() {
-        return meineNutzer.alleKunden.size();
+    public void registrieren(Nutzer nutzer) throws BenutzerExistiertBereitsException{
+        meineNutzer.registrieren(nutzer);
     }
 
-    //Kunde registrieren
-    public void registrieren(String vorname, String nachname, String login, String passwort, int nummer) throws BenutzerExistiertBereitsException {
-        meineNutzer.registrieren(vorname, nachname, login, passwort, nummer);
+    //returniert bei Erfolg Kunden oder Mitarbeiter
+    public Nutzer einloggen(String login, String passwort) throws LoginFehlgeschlagenException{
+        return (eingeloggterNutzer = meineNutzer.einloggen(login, passwort));
     }
 
-    //Mitarbeiter registrieren
-    public void registrieren(String vorname, String nachname, String login, String passwort, int nummer, boolean isMitarbeiter) throws BenutzerExistiertBereitsException {
-        meineNutzer.registrieren(vorname, nachname, login, passwort, nummer, isMitarbeiter);
+    public void ausloggen(){
+        eingeloggterNutzer = null;
     }
 
-    //Kunde einloggen
-    public Kunde einloggen(String login, String passwort) throws LoginFehlgeschlagenException {
-        return meineNutzer.einloggen(login, passwort);
+    public Warenkorbartikel hinzufuegen(Artikel a, Nutzer n) throws ArtikelNichtVerfuegbarException, ArtikelExistiertBereitsException {
+        return meinWarenkorb.hinzufuegen(a, n);
     }
 
-    //Mitarbeiter einloggen
-    public Mitarbeiter einloggen(String login, String passwort, boolean isMitarbeiter) throws LoginFehlgeschlagenException {
-        return meineNutzer.einloggen(login, passwort, true);
+    public Vector gibWarenkorbArtikel() {
+        return meinWarenkorb.getWarenkorb();
     }
 
 }

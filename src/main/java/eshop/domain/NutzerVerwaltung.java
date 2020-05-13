@@ -10,76 +10,47 @@ import java.util.Vector;
 
 public class NutzerVerwaltung {
 
-
     Vector<Nutzer> alleNutzer = new Vector();
-    Vector<Kunde> alleKunden = new Vector();
-    Vector<Mitarbeiter> alleMitarbeiter = new Vector();
 
     public NutzerVerwaltung() {
         try {
-            registrieren("Max", "Mustermann", "m_mustermann", "12345", 1);
-            registrieren("Timo", "Tischer", "t_tischer", "54321", 2, true);
-        } catch (BenutzerExistiertBereitsException e) {}
-    }
-
-    //Kunde registrieren
-    public void registrieren(String vorname, String nachname, String login, String passwort, int nummer) throws BenutzerExistiertBereitsException {
-        try {
-            Kunde kunde = sucheNachLogin(login);
-            throw new BenutzerExistiertBereitsException("Benutzer mit login: " + login + "existiert bereits.");
-        }
-        catch (LoginFehlgeschlagenException e) {
-            alleKunden.add(new Kunde(vorname, nachname, login, passwort, nummer));
+            registrieren(new Kunde("Max", "Mustermann", "m_mustermann", "12345"));
+            registrieren(new Mitarbeiter("Timo", "Tischer", "t_tischer", "54321"));
+        } catch (BenutzerExistiertBereitsException e) {
+            e.printStackTrace();
         }
     }
 
-    //Mitarbeiter registrieren
-    public void registrieren(String vorname, String nachname, String login, String passwort, int nummer, boolean isMitarbeiter) throws BenutzerExistiertBereitsException {
-        try {
-            Mitarbeiter mitarbeiter = sucheNachLogin(login, isMitarbeiter);
-            throw new BenutzerExistiertBereitsException("Benutzer mit login: " + login + "existiert bereits.");
+    public void registrieren(Nutzer nutzer) throws BenutzerExistiertBereitsException{
+        if (alleNutzer.contains(nutzer)){
+            throw new BenutzerExistiertBereitsException("Benutzer mit login: " + nutzer.getLogin() + " existiert bereits.");
         }
-        catch (LoginFehlgeschlagenException e) {
-            alleMitarbeiter.add(new Mitarbeiter(vorname, nachname, login, passwort, nummer));
-        }
+        alleNutzer.add(nutzer);
+        nutzer.setNummer(naechsteFreieNummer());
+    }
+
+    private int naechsteFreieNummer(){
+        return alleNutzer.size()+1;
     }
 
     //Kunde einloggen
-    public Kunde einloggen(String login, String passwort) throws LoginFehlgeschlagenException {
-        Kunde kunde = sucheNachLogin(login);
-        if (kunde.getPasswort().equals(passwort)) {
-            return kunde;
-        }
-        throw new LoginFehlgeschlagenException("Passwort war nicht richtig.");
-    }
-
-    //Mitarbeiter einloggen
-    public Mitarbeiter einloggen(String login, String passwort, boolean isMitarbeiter) throws LoginFehlgeschlagenException {
-        Mitarbeiter mitarbeiter = sucheNachLogin(login, isMitarbeiter);
-        if (mitarbeiter.getPasswort().equals(passwort)) {
-            return mitarbeiter;
+    public Nutzer einloggen(String login, String passwort) throws LoginFehlgeschlagenException {
+        Nutzer nutzer = sucheNachLogin(login);
+        if (nutzer.getPasswort().equals(passwort)) {
+            return nutzer;
         }
         throw new LoginFehlgeschlagenException("Passwort war nicht richtig.");
     }
 
     //Suche nach Kunde
-    private Kunde sucheNachLogin(String login) throws LoginFehlgeschlagenException {
-        for (Kunde kunde : alleKunden) {
-            if (kunde.getLogin().equals(login)) {
-                return kunde;
+    private Nutzer sucheNachLogin(String login) throws LoginFehlgeschlagenException {
+        System.out.println("Alle Nutzer: " + alleNutzer.size());
+        for (Nutzer nutzer : alleNutzer) {
+            if (nutzer.getLogin().equals(login)) {
+                return nutzer;
             }
         }
-        throw new LoginFehlgeschlagenException("Kunde mit login: " + login + " wurde nicht gefunden.");
-    }
-
-    //Suche nach Mitarbeiter
-    private Mitarbeiter sucheNachLogin(String login, boolean isMitarbeiter) throws LoginFehlgeschlagenException {
-        for (Mitarbeiter mitarbeiter : alleMitarbeiter) {
-            if (mitarbeiter.getLogin().equals(login) && mitarbeiter.isMitarbeiter() == isMitarbeiter) {
-                return mitarbeiter;
-            }
-        }
-        throw new LoginFehlgeschlagenException("Mitarbeiter mit login: " + login + " wurde nicht gefunden.");
+        throw new LoginFehlgeschlagenException("Nutzer mit login: " + login + " wurde nicht gefunden.");
     }
 
 }

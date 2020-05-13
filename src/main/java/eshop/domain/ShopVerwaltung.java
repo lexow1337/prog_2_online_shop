@@ -11,7 +11,7 @@ import java.util.Vector;
 
 public class ShopVerwaltung {
 
-    private Vector artikelBestand = new Vector();
+    private Vector<Artikel> artikelBestand = new Vector();
     private PersistenceManager pm = new FilePersistenceManager();
 
     public void liesDaten(String datei) throws IOException {
@@ -62,11 +62,14 @@ public class ShopVerwaltung {
         artikelBestand.remove(einArtikel);
     }
 
-    public Vector sucheArtikel(String bezeichnung) {
-        Vector suchErg = new Vector();
-        Iterator it = artikelBestand.iterator();
+    public Vector<Artikel> sucheArtikel(String bezeichnung) {
+
+        Vector<Artikel> suchErg = new Vector();
+
+        Iterator<Artikel> it = artikelBestand.iterator();
+
         while (it.hasNext()) {
-            Artikel artikel = (Artikel) it.next();
+            Artikel artikel = it.next();
             if (artikel.getBezeichnung().equals(bezeichnung)) {
                 suchErg.add(artikel);
             }
