@@ -46,7 +46,9 @@ public class ShopCUI {
     }
 
     private void gibNutzerMenueAus(Mitarbeiter nutzer){
-        System.out.print("\n Befehle: \n  Artikel ausgeben:  'a'");
+        System.out.print("\n Befehle: ");
+        System.out.print("         \n  ---------------------");
+        System.out.print("         \n  Artikel anzeigen:  'a'");
         System.out.print("         \n  Artikel löschen:  'd'");
         System.out.print("         \n  Artikel einfügen: 'e'");
         System.out.print("         \n  Artikel suchen:  'f'");
@@ -60,7 +62,10 @@ public class ShopCUI {
     }
 
     private void gibNutzerMenueAus(Kunde nutzer) {
-        System.out.print("\n Befehle: \n  Artikel anzeigen:  'a'");
+        System.out.print("\n Befehle: ");
+        System.out.print("         \n  ---------------------");
+        System.out.print("         \n  Artikel anzeigen:  'a'");
+        System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Artikel in Warenkorb:  'w'");
         System.out.print("         \n  Warenkorb ausgeben: 'm'");
         System.out.print("         \n  Bezahlen:  's'");
@@ -168,6 +173,7 @@ public class ShopCUI {
                 break;
             case "s":
                 shop.schreibeArtikel();
+                System.out.println("Die Artikel wurden gespeichert.");
                 break;
             case "t":
                 String vorname = liesEingabe("Vorname");
@@ -199,6 +205,12 @@ public class ShopCUI {
                 liste = shop.gibAlleArtikel();
                 gibArtikellisteAus(liste);
                 break;
+            case "f":
+                // Artikel suchen und ausgeben
+                bezeichnung = liesEingabe("Artikelbezeichnung");
+                liste = shop.sucheNachBezeichnung(bezeichnung);
+                gibArtikellisteAus(liste);
+                break;
             case "w":
                 //Artikel in den Warenkorb
                 System.out.println("Artikel in den Warenkorb");
@@ -206,7 +218,7 @@ public class ShopCUI {
                 liste = shop.sucheNachBezeichnung(bezeichnung);
                 try {
                     Warenkorbartikel warenkorbartikel = shop.hinzufuegen(liste.get(0), eingeloggterNutzer());
-                    System.out.println("Der Artikel " + warenkorbartikel.getArtikel() + " wurde von " + warenkorbartikel.getNutzer().getLogin() + " hinzugefuegt.");
+                    System.out.println("Der Artikel \n" + warenkorbartikel.getArtikel() + "\n wurde von " + warenkorbartikel.getNutzer().getLogin() + " hinzugefuegt.");
                 } catch(ArtikelNichtVerfuegbarException e) {
                     System.out.println(e.getMessage());
                 }
