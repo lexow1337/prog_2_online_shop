@@ -14,6 +14,12 @@ public class FilePersistenceManager implements PersistenceManager {
         reader = new BufferedReader(new FileReader(datei));
     }
 
+    /**
+     * Wadawdawda
+     * awdawd
+     * @param datei
+     * @throws IOException
+     */
     public void openForWriting(String datei) throws IOException {
         writer = new PrintWriter(new BufferedWriter(new FileWriter(datei)));
     }
