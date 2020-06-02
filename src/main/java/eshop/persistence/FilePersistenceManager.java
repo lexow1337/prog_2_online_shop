@@ -55,17 +55,20 @@ public class FilePersistenceManager implements PersistenceManager {
         String stringBestand = liesZeile();
         int bestand = Integer.parseInt(stringBestand);
 
+        String stringPreis = liesZeile();
+        int preis = Integer.parseInt(stringPreis);
+
         String verfuegbarCode = liesZeile();
         boolean verfuegbar = verfuegbarCode.equals("t") ? true : false;
 
-        return new Artikel(nummer, bestand, bezeichnung, marke, verfuegbar);
+        return new Artikel(bezeichnung, marke, nummer, preis, bestand, verfuegbar);
 
     }
 
     public boolean speichereArtikel(Artikel a) throws IOException {
         schreibeZeile(a.getBezeichnung());
         schreibeZeile(a.getMarke());
-        schreibeZeile(a.getNummer() + "");
+        schreibeZeile(a.getArtikelNummer() + "");
         schreibeZeile(a.getBestand() + "");
 
         if (a.isVerfuegbar()) {

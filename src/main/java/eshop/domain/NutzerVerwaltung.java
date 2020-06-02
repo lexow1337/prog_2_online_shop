@@ -21,6 +21,11 @@ public class NutzerVerwaltung {
         }
     }
 
+    /**
+     * Fuegt nutzer in alleNutzer hinzu, wenn noch nicht vorhanden.
+     * @param nutzer
+     * @throws BenutzerExistiertBereitsException
+     */
     public void registrieren(Nutzer nutzer) throws BenutzerExistiertBereitsException{
         if (alleNutzer.contains(nutzer)){
             throw new BenutzerExistiertBereitsException("Benutzer mit login: " + nutzer.getLogin() + " existiert bereits.");
@@ -29,11 +34,21 @@ public class NutzerVerwaltung {
         nutzer.setNummer(naechsteFreieNummer());
     }
 
+    /**
+     * Gibt naechste freie MA Nr.
+     * @return alleNutzer.size()+1
+     */
     private int naechsteFreieNummer(){
         return alleNutzer.size()+1;
     }
 
-    //Kunde einloggen
+    /**
+     * Nutzer einloggen.
+     * @param login
+     * @param passwort
+     * @return Nutzer nutzer
+     * @throws LoginFehlgeschlagenException
+     */
     public Nutzer einloggen(String login, String passwort) throws LoginFehlgeschlagenException {
         Nutzer nutzer = sucheNachLogin(login);
         if (nutzer.getPasswort().equals(passwort)) {
@@ -42,9 +57,14 @@ public class NutzerVerwaltung {
         throw new LoginFehlgeschlagenException("Passwort war nicht richtig.");
     }
 
-    //Suche nach Kunde
+    /**
+     * Sucht login-Name in alleNutzer
+     * @param login
+     * @return Nutzer nutzer
+     * @throws LoginFehlgeschlagenException
+     */
     private Nutzer sucheNachLogin(String login) throws LoginFehlgeschlagenException {
-        System.out.println("Alle Nutzer: " + alleNutzer.size());
+
         for (Nutzer nutzer : alleNutzer) {
             if (nutzer.getLogin().equals(login)) {
                 return nutzer;

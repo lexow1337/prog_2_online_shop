@@ -1,43 +1,76 @@
 package eshop.domain;
 
-import eshop.domain.exceptions.ArtikelNichtVerfuegbarException;
 import eshop.valueobjects.Artikel;
-import eshop.valueobjects.Nutzer;
-import eshop.valueobjects.Warenkorbartikel;
+import eshop.valueobjects.Warenkorb;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class WarenkorbVerwaltung {
 
-    Vector<Warenkorbartikel> warenkorbArtikel = new Vector();
-
-    private NutzerVerwaltung meineNutzer;
     private ShopVerwaltung meineArtikel;
 
-    public WarenkorbVerwaltung(NutzerVerwaltung _meineNutzer, ShopVerwaltung _meineArtikel) {
-        this.meineNutzer = _meineNutzer;
-        this.meineArtikel = _meineArtikel;
+    public WarenkorbVerwaltung(ShopVerwaltung meineArtikel) {
+        this.meineArtikel = meineArtikel;
     }
 
-    public Warenkorbartikel hinzufuegen(Artikel a, Nutzer n) throws ArtikelNichtVerfuegbarException /*ArtikelExistiertBereitsException*/ {
-
-        if (!a.isVerfuegbar()) { throw new ArtikelNichtVerfuegbarException(a, ""); }
-
-        //lif (warenkorbArtikel.contains(a)) { throw new ArtikelExistiertBereitsException(a, " - Bereits im Warenkorb"); }
-
-        Warenkorbartikel neuerWarenkorbartikelArtikel = new Warenkorbartikel(a, n);
-        warenkorbArtikel.add(neuerWarenkorbartikelArtikel);
-
-        //TODO: Decrease Artikelbestand
-        return neuerWarenkorbartikelArtikel;
+    /**
+     * Artikel aus Warenkorb entfernen.
+     * @param warenkorb
+     * @param nummer
+     * @return true / false
+     */
+    public boolean artikelAusWarenkorb(Warenkorb warenkorb, int nummer) {
+        return warenkorb.deleteArtikel(nummer);
     }
 
-    public void entfernen(Artikel einArtikel) {
-        warenkorbArtikel.remove(einArtikel);
+    /**
+     * Artikel in Warenkorb einfuegen.
+     * @param warenkorb
+     * @param artikel
+     * @param anzahl
+     */
+    public void artikelInWarenkorb(Warenkorb warenkorb, Artikel artikel, int anzahl) {
+        warenkorb.addArtikel(artikel, anzahl);
     }
 
-    public Vector getWarenkorb() {
-        return new Vector(warenkorbArtikel);
+    /**
+     * Bestand im Warenkorb aendern.
+     * @param warenkorb
+     * @param nummer
+     * @param anzahl
+     */
+    public void bestandImWarenkorb(Warenkorb warenkorb, int nummer, int anzahl) {
+        int menge = warenkorb.getMenge(nummer);
+        System.out.println(menge);
+        menge = anzahl;
+        warenkorb.setArtikel(nummer, anzahl);
+    }
+
+    /**
+     * Gibt eine Kopie des Warenkorb zurueck.
+     * @param warenkorb
+     * @return List<Artikel> warenkorbArtikelListe
+     */
+    public List<Artikel> zeigeWarenkorb(Warenkorb warenkorb) {
+        HashMap<Integer, Integer> warenkorbArtikel = warenkorb.getList();
+        List<Artikel> warenkorbArtikelListe = new ArrayList<>();
+
+        for (int nummer : warenkorbArtikel.keySet()) {
+            Artikel artikel = meineArtikel.sucheArtikelNummer(nummer);
+            if (artikel == null) {
+                continue;
+            }
+            int menge = warenkorbArtikel.get(nummer);
+            Artikel artikelcopy = new Artikel(artikel.getBezeichnung(), artikel.getMarke(), artikel.getArtikelNummer(), artikel.getPreis()*menge, menge);
+            warenkorbArtikelListe.add(artikelcopy);
+        }
+        return warenkorbArtikelListe;
+    }
+
+    public void warenkorbLoeschen(Warenkorb warenkorb) {
+        warenkorb.clearWarenkorb();
     }
 
 }
