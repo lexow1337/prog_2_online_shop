@@ -7,12 +7,4 @@ public class Mitarbeiter extends Nutzer {
         super(vorname, nachname, login, passwort);
     }
 
-    public void artikelAnlegen(Artikel a) {
-        // TODO: einen neuen Artikel im Shop anlegen
-    }
-
-    public void bestandAnpassen(Artikel a) {
-        // TODO: Bestand eines Artikels anpassen
-    }
-
 }

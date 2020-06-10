@@ -28,6 +28,7 @@ public class Shop {
         meinWarenkorb = new WarenkorbVerwaltung(meineArtikel);
 
         meineNutzer = new NutzerVerwaltung();
+        meineNutzer.liesDaten(datei+"_BENUTZER.txt");
     }
 
     // Ab hier: Funktionen fuer Nutzer
@@ -74,6 +75,10 @@ public class Shop {
      */
     public int nutzerAnzahl() {
         return meineNutzer.alleNutzer.size();
+    }
+
+    public void schreibeNutzer() throws IOException {
+        meineNutzer.schreibeNutzer(datei + "_BENUTZER.txt");
     }
 
     // Ab hier: Funktionen fuer Artikel
@@ -181,6 +186,13 @@ public class Shop {
         meinWarenkorb.artikelAusWarenkorb(((Kunde) eingeloggterNutzer).getWarenkorb(), nummer);
     }
 
+    public void warenkorbKaufen() throws IOException {
+        meinWarenkorb.warenkorbKaufen(((Kunde) eingeloggterNutzer).getWarenkorb(), ((Kunde) eingeloggterNutzer));
+    }
+
+    /**
+     * Loescht den Warenkorb
+     */
     public void warenKorbLoeschen() {
         meinWarenkorb.warenkorbLoeschen(((Kunde) eingeloggterNutzer).getWarenkorb());
     }

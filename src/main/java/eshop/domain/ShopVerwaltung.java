@@ -1,6 +1,7 @@
 package eshop.domain;
 
 import eshop.domain.exceptions.ArtikelExistiertBereitsException;
+import eshop.domain.exceptions.ArtikelExistiertNichtException;
 import eshop.domain.exceptions.ArtikelNichtVerfuegbarException;
 import eshop.persistence.FilePersistenceManager;
 import eshop.persistence.PersistenceManager;
@@ -113,9 +114,9 @@ public class ShopVerwaltung {
      * @param menge
      * @throws ArtikelNichtVerfuegbarException
      */
-    public void veraendereBestand(Artikel artikel, int menge) throws ArtikelNichtVerfuegbarException {
+    public void veraendereBestand(Artikel artikel, int menge) throws ArtikelExistiertNichtException {
         if (!artikelBestand.contains(artikel)) {
-            throw new ArtikelNichtVerfuegbarException(artikel, "");
+            throw new ArtikelExistiertNichtException(artikel.getArtikelNummer());
         }
         artikel.setBestand(menge);
     }

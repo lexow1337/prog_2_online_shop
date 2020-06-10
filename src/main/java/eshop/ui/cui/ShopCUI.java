@@ -176,7 +176,8 @@ public class ShopCUI {
                 break;
             case "s":
                 shop.schreibeArtikel();
-                System.out.println("Die Artikel wurden gespeichert.");
+                shop.schreibeNutzer();
+                System.out.println("Die Artikel und Nutzer wurden gespeichert.");
                 break;
             case "t":
                 String vorname = liesEingabe("Vorname");
@@ -243,7 +244,8 @@ public class ShopCUI {
                 shop.warenKorbLoeschen();
                 break;
             case "s":
-                System.out.println("Funktion noch nicht implementiert. Sorry...");
+                //Warenkorb kaufen
+                shop.warenkorbKaufen();
                 break;
             case "x":
                 shop.ausloggen();
@@ -259,7 +261,7 @@ public class ShopCUI {
     private void verarbeiteStartMenueEingabe(String line) throws EShopException, IOException {
         String login;
         String passwort;
-        int nummer;
+        String adresse;
 
         switch (line) {
             //Login verarbeiten
@@ -275,8 +277,11 @@ public class ShopCUI {
                 String nachname = liesEingabe("Nachname");
                 login = liesEingabe("Benutzername");
                 passwort = liesEingabe("Passwort");
+                adresse = liesEingabe("Adresse");
                 //Kunde registrieren
-                shop.registrieren(new Kunde(vorname,nachname,login,passwort));
+                shop.registrieren(new Kunde(vorname,nachname,login,passwort,adresse));
+                shop.schreibeNutzer();
+                System.out.println("Nutzer wurde erstellt.");
                 break;
             case "q":
                 break;

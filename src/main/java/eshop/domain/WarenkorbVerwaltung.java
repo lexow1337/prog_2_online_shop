@@ -1,11 +1,17 @@
 package eshop.domain;
 
+import eshop.domain.exceptions.ArtikelExistiertNichtException;
+import eshop.domain.exceptions.EShopException;
 import eshop.valueobjects.Artikel;
+import eshop.valueobjects.Kunde;
+import eshop.valueobjects.Rechnung;
 import eshop.valueobjects.Warenkorb;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WarenkorbVerwaltung {
 
@@ -68,6 +74,48 @@ public class WarenkorbVerwaltung {
         return warenkorbArtikelListe;
     }
 
+    /**
+     * Warenkorb Kaufvorgang.
+     * Artikelliste wird aus Warenkorb geladen.
+     * Es wird geprueft, ob der Warenkorb leer ist.
+     * Wenn Artikel im Warenkorb vorhanden sind, wird die WarenkorbArtikelListe iteriert.
+     * Der Artikelbestand im Shop wird um Warenkorbbestand verringert.
+     * Rechnung wird erstellt und ausgegeben.
+     * Warenkorb clear.
+     * @param warenkorb
+     * @param kunde
+     * @throws IOException
+     */
+    public void warenkorbKaufen(Warenkorb warenkorb, Kunde kunde) throws IOException {
+        HashMap<Integer, Integer> warenkorbArtikelListe = warenkorb.getList();
+
+        if (warenkorbArtikelListe.isEmpty()) {
+            System.out.println("Es befinden sich keine Artikel im Warenkorb");
+        } else {
+            for (HashMap.Entry<Integer, Integer> entry : warenkorbArtikelListe.entrySet()) {
+                Artikel artikel = meineArtikel.sucheArtikelNummer(entry.getKey());
+                int bestand = artikel.getBestand();
+                int warenkorbBestand = entry.getValue();
+                artikel.setBestand(bestand -= warenkorbBestand);
+                if (artikel.getBestand() <= 0) {
+                    try {
+                        meineArtikel.veraendereBestand(artikel, 0);
+                    } catch (ArtikelExistiertNichtException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            Rechnung r = new Rechnung(kunde, warenkorb, meineArtikel);
+            r.rechnungAusgeben();
+            warenkorb.clearWarenkorb();
+            System.out.println("Der Warenkorb wurde gekauft.");
+        }
+    }
+
+    /**
+     * Loescht den Warenkorb
+     * @param warenkorb
+     */
     public void warenkorbLoeschen(Warenkorb warenkorb) {
         warenkorb.clearWarenkorb();
     }
