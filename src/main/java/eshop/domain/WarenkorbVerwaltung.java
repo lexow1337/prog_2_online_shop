@@ -26,13 +26,12 @@ public class WarenkorbVerwaltung {
     }
 
     /**
-     * Artikel in Warenkorb einfuegen.
+     * Artikel in Warenkorb legen.
      * @param warenkorb
-     * @param artikel
      * @param anzahl
      */
-    public void artikelInWarenkorb(Warenkorb warenkorb, Artikel artikel, int anzahl) {
-        warenkorb.addArtikel(artikel, anzahl);
+    public void artikelInWarenkorb(Warenkorb warenkorb, int nummer, int anzahl) {
+        warenkorb.setArtikel(nummer, anzahl);
     }
 
     /**

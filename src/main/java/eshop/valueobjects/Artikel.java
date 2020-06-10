@@ -15,6 +15,7 @@ public class Artikel {
         this.setArtikelNummer(artikelNummer);
         this.setPreis(preis);
         this.setBestand(bestand);
+        if(bestand >= 0) { this.verfuegbar=true; }
     }
 
     public String toString() {
@@ -23,8 +24,9 @@ public class Artikel {
                 + " / Bezeichnung: " + bezeichnung + "\n"
                 + " / Marke: " + marke + "\n"
                 + " / Bestand: " + bestand + "\n"
-                + " / Verfügbarkeit: " + verfuegbarkeit) + "\n"
-                + "---------------------------------------------";
+                + " / Preis: " + preis + " € \n"
+                + " / Verfügbarkeit: " + verfuegbarkeit + "\n"
+                + "---------------------------------------------");
 
     }
 

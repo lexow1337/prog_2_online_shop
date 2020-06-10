@@ -1,6 +1,7 @@
 package eshop.ui.cui;
 
 import eshop.domain.Shop;
+import eshop.domain.exceptions.ArtikelExistiertNichtException;
 import eshop.domain.exceptions.ArtikelNichtVerfuegbarException;
 import eshop.domain.exceptions.EShopException;
 
@@ -9,6 +10,7 @@ import eshop.valueobjects.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Vector;
 
 public class ShopCUI {
@@ -67,7 +69,9 @@ public class ShopCUI {
         System.out.print("         \n  Artikel anzeigen:  'a'");
         System.out.print("         \n  Artikel suchen:  'f'");
         System.out.print("         \n  Artikel in Warenkorb:  'w'");
-        System.out.print("         \n  Warenkorb ausgeben: 'm'");
+        System.out.print("         \n  Warenkorb anzeigen: 'm'");
+        System.out.print("         \n  Artikel aus Warenkorb nehmen: 'd'");
+        System.out.print("         \n  Warenkorb loeschen: 'l'");
         System.out.print("         \n  Bezahlen:  's'");
         System.out.print("         \n  ---------------------");
         System.out.print("         \n  Ausloggen:  'x'");
@@ -128,10 +132,12 @@ public class ShopCUI {
         }
     }
 
+    //Mitarbeiter Eingabe
     private void verarbeiteNutzerEingabe(String line, Mitarbeiter nutzer) throws EShopException, IOException {
         int nummer;
         int bestand;
-        Vector liste;
+        int preis;
+        List<Artikel> liste;
         String marke;
         String bezeichnung;
         String login;
@@ -151,18 +157,15 @@ public class ShopCUI {
             case "d":
                 // Artikel loeschen Eingabe
                 nummer = liesEingabeGanzzahl("Artikelnummer");
-                bestand = liesEingabeGanzzahl("Bestand");
-                bezeichnung = liesEingabe("Artikelbezeichnung");
-                marke = liesEingabe("Marke");
-                // Die Bibliothek das Buch löschen lassen:
-                shop.loescheArtikel(bezeichnung, marke, bestand, nummer);
+                shop.loescheArtikel(nummer);
                 break;
             case "e":
                 // Artikel einfuegen Eingabe
                 bezeichnung = liesEingabe("Artikelbezeichnung");
                 marke = liesEingabe("Marke");
                 bestand = liesEingabeGanzzahl("Bestand");
-                shop.fuegeArtikelEin(bezeichnung, marke, bestand);
+                preis = liesEingabeGanzzahl("Preis");
+                shop.fuegeArtikelEin(bezeichnung, marke, bestand, preis);
                 System.out.println("Einfügen ok");
                 break;
             case "f":
@@ -194,9 +197,11 @@ public class ShopCUI {
 
     }
 
+    //Kunden Eingabe
     private void verarbeiteNutzerEingabe(String line, Kunde nutzer) throws EShopException, IOException {
-        Vector<Artikel> liste;
+        List<Artikel> liste;
         String bezeichnung;
+        int nummer;
         int menge;
 
         switch (line){
@@ -214,20 +219,28 @@ public class ShopCUI {
             case "w":
                 //Artikel in den Warenkorb
                 System.out.println("Artikel in den Warenkorb");
-                bezeichnung = liesEingabe("Artikelbezeichnung");
-                liste = shop.sucheNachBezeichnung(bezeichnung);
+                nummer = liesEingabeGanzzahl("Artikelnummer");
+                menge = liesEingabeGanzzahl("Menge");
                 try {
-                    Warenkorbartikel warenkorbartikel = shop.hinzufuegen(liste.get(0), eingeloggterNutzer());
-                    System.out.println("Der Artikel \n" + warenkorbartikel.getArtikel() + "\n wurde von " + warenkorbartikel.getNutzer().getLogin() + " hinzugefuegt.");
-                } catch(ArtikelNichtVerfuegbarException e) {
+                    shop.artikelInWarenkorb(nummer, menge);
+                } catch(ArtikelExistiertNichtException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
             case "m":
                 //Warenkorb ausgeben
                 System.out.println("Im Warenkorb: ");
-                liste = shop.gibWarenkorbArtikel();
+                liste = shop.warenkorbAnzeigen();
                 gibArtikellisteAus(liste);
+                break;
+            case "d":
+                //Artikel aus Warenkorb nehmen
+                nummer = liesEingabeGanzzahl("Artikelnummer: ");
+                shop.artikelAusWarenkorbNehmen(nummer);
+                break;
+            case "l":
+                //Warenkorb loeschen
+                shop.warenKorbLoeschen();
                 break;
             case "s":
                 System.out.println("Funktion noch nicht implementiert. Sorry...");
@@ -273,7 +286,7 @@ public class ShopCUI {
 
     }
 
-    private void gibArtikellisteAus(Vector liste) {
+    private void gibArtikellisteAus(List liste) {
         if (liste.isEmpty()) {
             System.out.println("Liste ist leer.");
         } else {

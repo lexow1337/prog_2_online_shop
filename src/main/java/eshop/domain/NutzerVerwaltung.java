@@ -6,11 +6,12 @@ import eshop.valueobjects.Kunde;
 import eshop.valueobjects.Mitarbeiter;
 import eshop.valueobjects.Nutzer;
 
+import java.util.List;
 import java.util.Vector;
 
 public class NutzerVerwaltung {
 
-    Vector<Nutzer> alleNutzer = new Vector();
+    List<Nutzer> alleNutzer = new Vector();
 
     public NutzerVerwaltung() {
         try {

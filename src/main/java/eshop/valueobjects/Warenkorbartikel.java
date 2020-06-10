@@ -1,10 +1,5 @@
 package eshop.valueobjects;
 
-import eshop.domain.ArtikelVerwaltung;
-import eshop.domain.NutzerVerwaltung;
-import eshop.domain.ShopVerwaltung;
-import eshop.domain.exceptions.ArtikelExistiertBereitsException;
-
 import java.util.Date;
 import java.util.Vector;
 

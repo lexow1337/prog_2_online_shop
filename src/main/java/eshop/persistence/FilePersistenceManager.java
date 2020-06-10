@@ -56,12 +56,12 @@ public class FilePersistenceManager implements PersistenceManager {
         int bestand = Integer.parseInt(stringBestand);
 
         String stringPreis = liesZeile();
-        int preis = Integer.parseInt(stringPreis);
+        float preis = Float.parseFloat(stringPreis);
 
-        String verfuegbarCode = liesZeile();
-        boolean verfuegbar = verfuegbarCode.equals("t") ? true : false;
+        //String verfuegbarCode = liesZeile();
+        //boolean verfuegbar = verfuegbarCode.equals("t") ? true : false;
 
-        return new Artikel(bezeichnung, marke, nummer, preis, bestand, verfuegbar);
+        return new Artikel(bezeichnung, marke, nummer, preis, bestand);
 
     }
 
@@ -70,13 +70,14 @@ public class FilePersistenceManager implements PersistenceManager {
         schreibeZeile(a.getMarke());
         schreibeZeile(a.getArtikelNummer() + "");
         schreibeZeile(a.getBestand() + "");
+        schreibeZeile(Float.toString(a.getPreis()));
 
-        if (a.isVerfuegbar()) {
+/*        if (a.isVerfuegbar()) {
             schreibeZeile("t");
         }
         else {
             schreibeZeile("f");
-        }
+        }*/
         return true;
     }
 

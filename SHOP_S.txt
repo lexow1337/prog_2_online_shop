@@ -2,29 +2,24 @@ Crash Bandicoot N.Sane Trilogy
 Nintendo
 1
 14
-t
+50.0
 Mario Kart 8 Deluxe
 Nintendo
 2
 4
-t
+50.0
 Red Dead Redemption 2
 Rockstar Games
 3
 8
-t
+50.0
 Super Mario Bros U Deluxe
 Nintendo
 4
 2
-t
+50.0
 Animal Crossing New Horizons
 Nintendo
 5
 3
-t
-Nintendo Switch (neues Modell)
-Nintendo
-6
-7
-t
+50.0

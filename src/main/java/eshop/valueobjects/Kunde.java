@@ -6,6 +6,7 @@ public class Kunde extends Nutzer {
     private String hausnr = "";
     private String plz = "";
     private String ort = "";
+    Warenkorb warenkorb = new Warenkorb();
 
     public Kunde(String vorname, String nachname, String login, String passwort) {
         super(vorname, nachname, login, passwort);
@@ -20,6 +21,8 @@ public class Kunde extends Nutzer {
     }
 
     // Getter
+    public Warenkorb getWarenkorb() { return warenkorb; }
+
     public String getStrasse() {
         return strasse;
     }

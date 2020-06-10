@@ -23,6 +23,21 @@ public class Warenkorb {
     }
 
     /**
+     * Gibt Anzahl des Artikels im Warenkorb wieder.
+     * @param artikel
+     * @return int anzahl
+     */
+    public int countArtikel(Artikel artikel) {
+        int anzahl = 0;
+        for (Artikel aktArtikel : artikelListe) {
+            if (aktArtikel.equals(artikel)) {
+                anzahl++;
+            }
+        }
+        return anzahl;
+    }
+
+    /**
      * Loescht Artikel anhand der Artikelnummer aus dem Warenkorb.
      * @param artikelnummer
      * @return true / false
@@ -53,6 +68,10 @@ public class Warenkorb {
         list.put(nummer, list.getOrDefault(nummer, 0)+menge);
     }
 
+    /**
+     * Gibt die HashMap des Warenkorbs wieder
+     * @return HashMap<Integer, Integer>
+     */
     public HashMap<Integer, Integer> getList() { return list; }
 
     /**

@@ -8,11 +8,12 @@ import eshop.valueobjects.Artikel;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 public class ShopVerwaltung {
 
-    private Vector<Artikel> artikelBestand = new Vector();
+    private List<Artikel> artikelBestand = new Vector();
     private PersistenceManager pm = new FilePersistenceManager();
 
     /**
@@ -75,12 +76,12 @@ public class ShopVerwaltung {
     }
 
     /**
-     * Gibt einen Vector mit Artikeln zurueck, die der Bezeichnung entsprechen.
+     * Gibt eine Liste mit Artikeln zurueck, die der Bezeichnung entsprechen.
      * @param bezeichnung
-     * @return Vector<Artikel>
+     * @return List<Artikel>
      */
-    public Vector<Artikel> sucheArtikel(String bezeichnung) {
-        Vector<Artikel> suchErg = new Vector();
+    public List<Artikel> sucheArtikel(String bezeichnung) {
+        List<Artikel> suchErg = new Vector();
         Iterator<Artikel> it = artikelBestand.iterator();
 
         while (it.hasNext()) {
@@ -95,7 +96,7 @@ public class ShopVerwaltung {
     /**
      * Gibt Artikel anhand Artikelnummer zurueck.
      * @param nummer
-     * @return
+     * @return Artikel
      */
     public Artikel sucheArtikelNummer(int nummer) {
         for (Artikel artikel : artikelBestand) {
@@ -146,10 +147,10 @@ public class ShopVerwaltung {
     }
 
     /**
-     * Gibt einen neuen Vector des artikelBestand zurueck.
-     * @return
+     * Gibt eine neue Liste des artikelBestand zurueck.
+     * @return Vector(artikelBestand)
      */
-    public Vector getArtikelBestand() {
+    public List<Artikel> getArtikelBestand() {
         return new Vector(artikelBestand);
     }
 
