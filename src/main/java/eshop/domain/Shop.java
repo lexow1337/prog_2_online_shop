@@ -13,6 +13,7 @@ public class Shop {
     private ShopVerwaltung meineArtikel;
     private NutzerVerwaltung meineNutzer;
     private WarenkorbVerwaltung meinWarenkorb;
+    private EreignisVerwaltung ereignisVw;
     private Nutzer eingeloggterNutzer;
 
     /**
@@ -29,6 +30,10 @@ public class Shop {
 
         meineNutzer = new NutzerVerwaltung();
         meineNutzer.liesDaten(datei+"_BENUTZER.txt");
+
+        ereignisVw = new EreignisVerwaltung();
+        ereignisVw.liesDaten(datei+"_EREIGNIS.txt");
+
     }
 
     // Ab hier: Funktionen fuer Nutzer
@@ -123,6 +128,8 @@ public class Shop {
         Artikel a = new Artikel(bezeichnung, marke, nummer, preis, bestand);
         if(bestand >= 1) { a.setVerfuegbar(true); }
         meineArtikel.einfuegen(a);
+        String typ = "artikeleinfuegen";
+        ereignisVw.erstelleEreignis(eingeloggterNutzer, a, bestand, typ);
         return a;
     }
 
@@ -134,8 +141,10 @@ public class Shop {
         Artikel a = meineArtikel.sucheArtikelNummer(nummer);
         if (a != null) {
             meineArtikel.loeschen(a);
+            int menge = 0;
+            String typ = "artikelloeschen";
+            ereignisVw.erstelleEreignis(eingeloggterNutzer, a, menge, typ);
         }
-        //TODO: Ereignisverwaltung
     }
 
     /**
@@ -195,6 +204,16 @@ public class Shop {
      */
     public void warenKorbLoeschen() {
         meinWarenkorb.warenkorbLoeschen(((Kunde) eingeloggterNutzer).getWarenkorb());
+    }
+
+    //Ab hier: Ereignisse
+
+    public void schreibeEreignis() throws IOException {
+        ereignisVw.schreibeEreignisse(datei+"_EREIGNIS.txt", eingeloggterNutzer);
+    }
+
+    public List<Ereignis> gibEreignisListe(){
+        return ereignisVw.gibEreignisListe();
     }
 
 }

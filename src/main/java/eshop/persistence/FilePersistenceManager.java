@@ -1,9 +1,6 @@
 package eshop.persistence;
 
-import eshop.valueobjects.Artikel;
-import eshop.valueobjects.Kunde;
-import eshop.valueobjects.Mitarbeiter;
-import eshop.valueobjects.Nutzer;
+import eshop.valueobjects.*;
 
 import java.io.*;
 import java.nio.Buffer;
@@ -126,6 +123,33 @@ public class FilePersistenceManager implements PersistenceManager {
         }
         return true;
     }
+
+    public Ereignis ladeEreignis() throws IOException {
+        String typ = liesZeile();
+        if (typ == null) {
+            return null;
+        }
+        String artikelNrStr = liesZeile();
+        int artikelNr = Integer.parseInt(artikelNrStr);
+        String artikelAnzahlStr = liesZeile();
+        int artikelAnzahl = Integer.parseInt(artikelAnzahlStr);
+        String nutzerNrStr = liesZeile();
+        int nutzerNr = Integer.parseInt(nutzerNrStr);
+        String datum = liesZeile();
+        String login = liesZeile();
+        return new Ereignis(typ, artikelNr, artikelAnzahl, nutzerNr, login, datum);
+    }
+
+    public boolean speichereEreignis(Ereignis b, Nutzer n) throws IOException {
+        schreibeZeile(b.getTyp());
+        schreibeZeile(b.getArtikelNr() + "");
+        schreibeZeile(b.getArtikelanzahl() + "");
+        schreibeZeile(b.getBenutzerNr() + "");
+        schreibeZeile(b.getDatum() + "");
+        schreibeZeile(n.getLogin());
+        return true;
+    }
+
 
     private String liesZeile() throws IOException {
         if (reader != null)

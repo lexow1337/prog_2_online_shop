@@ -16,7 +16,6 @@ import java.util.Vector;
 public class ShopCUI {
 
     private Shop shop;
-    private Warenkorbartikel meinWarenkorbartikel;
     private BufferedReader in;
 
     public ShopCUI(String datei) throws IOException {
@@ -191,6 +190,9 @@ public class ShopCUI {
                 shop.ausloggen();
                 break;
             case "q":
+                shop.schreibeNutzer();
+                shop.schreibeArtikel();
+                shop.schreibeEreignis();
                 break;
             default:
                 System.out.println("Ungültige Eingabe");
@@ -251,6 +253,9 @@ public class ShopCUI {
                 shop.ausloggen();
                 break;
             case "q":
+                shop.schreibeNutzer();
+                shop.schreibeArtikel();
+                shop.schreibeEreignis();
                 break;
             default:
                 System.out.println("Ungültige Eingabe");
@@ -284,6 +289,9 @@ public class ShopCUI {
                 System.out.println("Nutzer wurde erstellt.");
                 break;
             case "q":
+                shop.schreibeNutzer();
+                shop.schreibeArtikel();
+                shop.schreibeEreignis();
                 break;
             default:
                 System.out.println("Ungültige Eingabe");

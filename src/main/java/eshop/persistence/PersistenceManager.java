@@ -1,6 +1,7 @@
 package eshop.persistence;
 
 import eshop.valueobjects.Artikel;
+import eshop.valueobjects.Ereignis;
 import eshop.valueobjects.Nutzer;
 
 import java.io.IOException;
@@ -17,5 +18,7 @@ public interface PersistenceManager {
     public Nutzer ladeNutzer() throws IOException;
     public boolean speichereNutzer(Nutzer n) throws IOException;
 
+    public Ereignis ladeEreignis() throws IOException;
+    public boolean speichereEreignis(Ereignis b, Nutzer n) throws IOException;
 
 }
