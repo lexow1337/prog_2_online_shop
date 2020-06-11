@@ -290,7 +290,7 @@ public class RegistrationPanel extends JPanel {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Passw�rter nicht gleich", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Passwoerter nicht gleich", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }else {
             JOptionPane.showMessageDialog(this, "Bitte etwas eingeben!!", "Error", JOptionPane.INFORMATION_MESSAGE);

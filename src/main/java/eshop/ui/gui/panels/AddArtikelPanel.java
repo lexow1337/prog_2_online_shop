@@ -10,16 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-//Wichtig: Das AddBookPanel _ist ein_ Panel und damit auch eine Component;
-//es kann daher in das Layout eines anderen Containers
-//(in unserer Anwendung des Frames) eingef�gt werden.
 public class AddArtikelPanel extends JPanel {
 
-    // �ber dieses Interface �bermittelt das AddArtikelPanel
-    // ein neu hinzugef�gtes Buch an einen Empf�nger.
-    // In unserem Fall ist der Empf�nger die EshopGuiMitKomponenten,
-    // die dieses Interface implementiert und auf ein neue hinzugef�gtes
-    // Artikel reagiert, indem sie die Artikelliste aktualisiert.
     public interface AddArtikelListener {
         public void onArtikelAdded (Artikel artikel);
     }
@@ -51,7 +43,6 @@ public class AddArtikelPanel extends JPanel {
     }
 
     private void setupUI() {
-        // GridLayout (nicht zu verwechseln mit GridBagLayout!)
         int anzahlZeilen = 12;
         setLayout(new GridLayout(0, 2, 0, 0));
         JLabel label_4 = new JLabel("Nummer:");
@@ -80,8 +71,6 @@ public class AddArtikelPanel extends JPanel {
         this.add(massengutTextField);
         addButton = new JButton("Einfuegen");
         this.add(addButton);
-
-//		Font font = new Font("Arial", Font.BOLD,12);
 
         JLabel label_1 = new JLabel("");
         add(label_1);
@@ -113,10 +102,6 @@ public class AddArtikelPanel extends JPanel {
         add(label_6);
 
         lblLschen.setFont(font);
-
-        // Mit leeren Labels als Platzhalter auff�llen,
-        // damit die einzelnen Zellen nicht �berm��ig gro� werden
-        // (bei GridLayout sind alle Zellen gleich gro�!).
 
         for (int i=6; i<anzahlZeilen; i++) {
             this.add(new JLabel());

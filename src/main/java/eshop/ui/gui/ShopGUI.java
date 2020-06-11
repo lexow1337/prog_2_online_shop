@@ -44,18 +44,6 @@ public class ShopGUI extends JFrame implements LoginListener {
         //Menu definieren
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
-
-/*
-		JButton buttonLogin = new JButton("Login");
-		buttonlogin.addActionListener(new LoginActionListener());
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.CENTER;
-        newPanel.add(buttonLogin, constraints);
- */
-
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         getContentPane().add(tabbedPane, BorderLayout.NORTH);
         loginPanel = new LoginPanel();
@@ -67,13 +55,6 @@ public class ShopGUI extends JFrame implements LoginListener {
 
         pack();
         setLocationRelativeTo(null);
-
-
-
-//		JPanel loginPanel = new JPanel();
-//		loginPanel.setBorder(BorderFactory.createTitledBorder("LOGIN"));
-
-//		JPanel loginButtonPanel = new JPanel();
 
         this.setVisible(true);
 

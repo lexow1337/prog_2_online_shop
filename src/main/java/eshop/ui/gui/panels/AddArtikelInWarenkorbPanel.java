@@ -12,16 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-//Wichtig: Das AddBookPanel _ist ein_ Panel und damit auch eine Component;
-//es kann daher in das Layout eines anderen Containers
-//(in unserer Anwendung des Frames) eingef�gt werden.
 public class AddArtikelInWarenkorbPanel extends JPanel {
 
-    // �ber dieses Interface �bermittelt das AddArtikelPanel
-    // ein neu hinzugef�gtes Buch an einen Empf�nger.
-    // In unserem Fall ist der Empf�nger die EshopGuiMitKomponenten,
-    // die dieses Interface implementiert und auf ein neue hinzugef�gtes
-    // Artikel reagiert, indem sie die Artikelliste aktualisiert.
     public interface AddArtikelInWarenkorbListener {
         public void onArtikelAdded(Artikel artikel);
     }
@@ -48,7 +40,7 @@ public class AddArtikelInWarenkorbPanel extends JPanel {
 
     private void setupUI() {
         // GridLayout (nicht zu verwechseln mit GridBagLayout!)
-        int anzahlZeilen = 12; //f�r leere Labels als Abstandshalter
+        int anzahlZeilen = 12; //fuer leere Labels als Abstandshalter
         this.setLayout(new GridLayout(anzahlZeilen, 1));
 
         this.add(new JLabel("Nummer:"));
@@ -60,7 +52,7 @@ public class AddArtikelInWarenkorbPanel extends JPanel {
         this.add(mengeTextField);
 
         this.add(new JLabel()); // Abstandshalter
-        addButton = new JButton("Einf�gen");
+        addButton = new JButton("Einfuegen");
         this.add(addButton);
 
         // Mit leeren Labels als Platzhalter auff�llen,

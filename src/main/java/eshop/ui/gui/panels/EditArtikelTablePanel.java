@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class EditArtikelTablePanel extends JTable {
@@ -34,8 +35,8 @@ public class EditArtikelTablePanel extends JTable {
 
     public void updateArtikelList(java.util.List<Artikel> artikel) {
         // Sortierung (mit Lambda-Expression)
-        //Collections.sort(buecher, (b1, b2) -> b1.getTitel().compareTo(b2.getTitel()));	// Sortierung nach Titel
-        Collections.sort(artikel, (b1, b2) -> b1.getArtikelNummer() - b2.getArtikelNummer());    // Sortierung nach Nummer
+        //Collections.sort(buecher, (b1, b2) -> b1.getTitel().compareTo(b2.getTitel()));    // Sortierung nach Titel
+        Collections.sort(artikel, Comparator.comparingInt(Artikel::getArtikelNummer));    // Sortierung nach Nummer
 
         // TableModel von JTable holen und ...
         ArtikelTableModel tableModel = (ArtikelTableModel) getModel();

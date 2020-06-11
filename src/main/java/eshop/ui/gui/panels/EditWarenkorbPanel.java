@@ -17,10 +17,10 @@ import java.io.IOException;
 //(in unserer Anwendung des Frames) eingef�gt werden.
 public class EditWarenkorbPanel extends JPanel {
 
-    // �ber dieses Interface �bermittelt das AddArtikelPanel
-    // ein neu hinzugef�gtes Buch an einen Empf�nger.
-    // In unserem Fall ist der Empf�nger die EshopGuiMitKomponenten,
-    // die dieses Interface implementiert und auf ein neue hinzugef�gtes
+    // Ueber dieses Interface uebermittelt das AddArtikelPanel
+    // ein neu hinzugefuegtes Buch an einen Empfaenger.
+    // In unserem Fall ist der Empfaenger die EshopGuiMitKomponenten,
+    // die dieses Interface implementiert und auf ein neue hinzugefuegtes
     // Artikel reagiert, indem sie die Artikelliste aktualisiert.
     public interface EditWarenkorbListener {
         public void onWarenkorbEdited();
@@ -51,7 +51,7 @@ public class EditWarenkorbPanel extends JPanel {
 
     private void setupUI() {
         // GridLayout (nicht zu verwechseln mit GridBagLayout!)
-        int anzahlZeilen = 12; //f�r leere Labels als Abstandshalter
+        int anzahlZeilen = 12; //fuer leere Labels als Abstandshalter
         this.setLayout(new GridLayout(anzahlZeilen, 1));
 
         this.add(new JLabel("Nummer:"));
@@ -68,9 +68,9 @@ public class EditWarenkorbPanel extends JPanel {
         editButton = new JButton("Bearbeiten");
         this.add(editButton);
 
-        // Mit leeren Labels als Platzhalter auff�llen,
-        // damit die einzelnen Zellen nicht �berm��ig gro� werden
-        // (bei GridLayout sind alle Zellen gleich gro�!).
+        // Mit leeren Labels als Platzhalter auffuellen,
+        // damit die einzelnen Zellen nicht uebermaessig gross werden
+        // (bei GridLayout sind alle Zellen gleich gross!).
 
         for (int i=6; i<anzahlZeilen; i++) {
             this.add(new JLabel());
