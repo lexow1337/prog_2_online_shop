@@ -7,7 +7,7 @@ public class ArtikelExistiertBereitsException extends EShopException {
     private Artikel artikel;
 
     public ArtikelExistiertBereitsException(Artikel artikel, String zusatzMsg) {
-        super("Artikel mit Bezeichnung " + artikel.getBezeichnung() + " und Nummer " + artikel.getNummer()
+        super("Artikel mit Bezeichnung " + artikel.getBezeichnung() + " und Nummer " + artikel.getArtikelNummer()
                 + "existiert bereits" + zusatzMsg);
         this.artikel = artikel;
     }

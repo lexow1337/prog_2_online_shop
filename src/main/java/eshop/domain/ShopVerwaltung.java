@@ -1,42 +1,47 @@
 package eshop.domain;
 
 import eshop.domain.exceptions.ArtikelExistiertBereitsException;
+import eshop.domain.exceptions.ArtikelExistiertNichtException;
+import eshop.domain.exceptions.ArtikelNichtVerfuegbarException;
 import eshop.persistence.FilePersistenceManager;
 import eshop.persistence.PersistenceManager;
 import eshop.valueobjects.Artikel;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 public class ShopVerwaltung {
 
-    private Vector<Artikel> artikelBestand = new Vector();
+    private List<Artikel> artikelBestand = new Vector();
     private PersistenceManager pm = new FilePersistenceManager();
 
+    /**
+     * Liest Daten aus Datei ueber PersistenzManager.
+     * Fuegt Artikel im artikelBestand ein.
+     * @param datei
+     * @throws IOException
+     */
     public void liesDaten(String datei) throws IOException {
-        // PersistenzManager für Lesevorgänge öffnen
         pm.openForReading(datei);
-
         Artikel einArtikel;
         do {
-            // Artikel-Objekt einlesen
             einArtikel = pm.ladeArtikel();
             if (einArtikel != null) {
-                // Artikel in Liste einfügen
                 try {
                     einfuegen(einArtikel);
-                } catch (ArtikelExistiertBereitsException e1) {
-                    // Kann hier eigentlich nicht auftreten,
-                    // daher auch keine Fehlerbehandlung...
-                }
+                } catch (ArtikelExistiertBereitsException e1) {}
             }
         } while (einArtikel != null);
-
-        // Persistenz-Schnittstelle wieder schließen
         pm.close();
     }
 
+    /**
+     * Schreibt Daten in Datei ueber PersistenzManager.
+     * @param datei
+     * @throws IOException
+     */
     public void schreibeDaten(String datei) throws IOException {
         pm.openForWriting(datei);
 
@@ -50,6 +55,11 @@ public class ShopVerwaltung {
         pm.close();
     }
 
+    /**
+     * Artikel in artikelBestand einfuegen.
+     * @param einArtikel
+     * @throws ArtikelExistiertBereitsException
+     */
     public void einfuegen(Artikel einArtikel) throws ArtikelExistiertBereitsException {
         if (artikelBestand.contains(einArtikel)) {
             throw new ArtikelExistiertBereitsException(einArtikel, " - in 'einfuegen()'");
@@ -58,14 +68,21 @@ public class ShopVerwaltung {
         artikelBestand.add(einArtikel);
     }
 
+    /**
+     * Artikel aus artikelBestand entfernen.
+     * @param einArtikel
+     */
     public void loeschen(Artikel einArtikel) {
         artikelBestand.remove(einArtikel);
     }
 
-    public Vector<Artikel> sucheArtikel(String bezeichnung) {
-
-        Vector<Artikel> suchErg = new Vector();
-
+    /**
+     * Gibt eine Liste mit Artikeln zurueck, die der Bezeichnung entsprechen.
+     * @param bezeichnung
+     * @return List<Artikel>
+     */
+    public List<Artikel> sucheArtikel(String bezeichnung) {
+        List<Artikel> suchErg = new Vector();
         Iterator<Artikel> it = artikelBestand.iterator();
 
         while (it.hasNext()) {
@@ -77,7 +94,64 @@ public class ShopVerwaltung {
         return suchErg;
     }
 
-    public Vector getArtikelBestand() {
+    /**
+     * Gibt Artikel anhand Artikelnummer zurueck.
+     * @param nummer
+     * @return Artikel
+     */
+    public Artikel sucheArtikelNummer(int nummer) {
+        for (Artikel artikel : artikelBestand) {
+            if (artikel.getArtikelNummer() == nummer) {
+                return artikel;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Veraendert Menge eines Artikels im artikelBestand.
+     * @param artikel
+     * @param menge
+     * @throws ArtikelNichtVerfuegbarException
+     */
+    public void veraendereBestand(Artikel artikel, int menge) throws ArtikelExistiertNichtException {
+        if (!artikelBestand.contains(artikel)) {
+            throw new ArtikelExistiertNichtException(artikel.getArtikelNummer());
+        }
+        artikel.setBestand(menge);
+    }
+
+    /**
+     * Verringert Menge eines Artikels im artikelBestand
+     * @param artikel
+     * @param menge
+     * @throws ArtikelNichtVerfuegbarException
+     */
+    public void verringereBestand(Artikel artikel, int menge) throws ArtikelNichtVerfuegbarException {
+        if (!artikelBestand.contains(artikel)) {
+            throw new ArtikelNichtVerfuegbarException(artikel, "");
+        }
+        artikel.setBestand(artikel.getBestand() - menge);
+    }
+
+    /**
+     * Erhoeht Menge eines Artikels im artikelBestand.
+     * @param artikel
+     * @param menge
+     * @throws ArtikelNichtVerfuegbarException
+     */
+    public void bestandErhoehen(Artikel artikel, int menge) throws ArtikelNichtVerfuegbarException {
+        if (!artikelBestand.contains(artikel)) {
+            throw new ArtikelNichtVerfuegbarException(artikel, "");
+        }
+        artikel.setBestand(artikel.getBestand() - menge);
+    }
+
+    /**
+     * Gibt eine neue Liste des artikelBestand zurueck.
+     * @return Vector(artikelBestand)
+     */
+    public List<Artikel> getArtikelBestand() {
         return new Vector(artikelBestand);
     }
 

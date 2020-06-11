@@ -6,7 +6,7 @@ public class ArtikelNichtVerfuegbarException extends EShopException{
     private Artikel artikel;
 
     public ArtikelNichtVerfuegbarException(Artikel artikel, String zusatzMsg) {
-        super("Artikel mit Bezeichnung " + artikel.getBezeichnung() + " und der Nummer " +artikel.getNummer() + " ist leider nicht verfuegbar " + zusatzMsg);
+        super("Artikel mit Bezeichnung " + artikel.getBezeichnung() + " und der Nummer " +artikel.getArtikelNummer() + " ist leider nicht verfuegbar " + zusatzMsg);
         this.artikel=artikel;
     }
 }
