@@ -43,8 +43,9 @@ public class Shop {
      * @param nutzer
      * @throws BenutzerExistiertBereitsException
      */
-    public void registrieren(Nutzer nutzer) throws BenutzerExistiertBereitsException{
+    public void registrieren(Nutzer nutzer) throws BenutzerExistiertBereitsException, IOException {
         meineNutzer.registrieren(nutzer);
+        schreibeNutzer();
     }
 
     /**
@@ -111,6 +112,19 @@ public class Shop {
      */
     public List<Artikel> sucheNachBezeichnung(String bezeichnung) {
         return meineArtikel.sucheArtikel(bezeichnung);
+    }
+
+    /**
+     * Gibt Artikel mit bestimmter Artikelnummer zurueck.
+     * @param nr
+     * @return Artikel
+     */
+    public Artikel sucheNachNummer(int nr) {
+        return meineArtikel.sucheArtikelNummer(nr);
+    }
+
+    public void aendereBestand(int nummer, int menge) {
+        meineArtikel.sucheArtikelNummer(nummer).setBestand(menge);
     }
 
     /**
@@ -187,11 +201,29 @@ public class Shop {
             meinWarenkorb.artikelInWarenkorb(((Kunde) eingeloggterNutzer).getWarenkorb(), artikel.getArtikelNummer(), menge);
     }
 
+    public void bestandImWarenkorbAendern(int nummer, int menge) throws ArtikelExistiertNichtException, ArtikelBestandZuWenigException {
+        Artikel artikel = meineArtikel.sucheArtikelNummer(nummer);
+        if (artikel == null) {
+            throw new ArtikelExistiertNichtException(nummer);
+        } else {
+            if (artikel.getBestand() < menge + ((Kunde) eingeloggterNutzer).getWarenkorb().getMenge(nummer)) {
+                throw new ArtikelBestandZuWenigException();
+            } else {
+                meinWarenkorb.bestandImWarenkorb(((Kunde) eingeloggterNutzer).getWarenkorb(), artikel.getArtikelNummer(), menge);
+
+                if (((Kunde) eingeloggterNutzer).getWarenkorb().getMenge(nummer) <= 0) {
+                    artikelAusWarenkorbNehmen(nummer);
+                }
+            }
+        }
+    }
+
     /**
      * Artikel aus Warenkorb loeschen
      * @param nummer
      */
     public void artikelAusWarenkorbNehmen(int nummer) {
+        meineArtikel.sucheArtikelNummer(nummer);
         meinWarenkorb.artikelAusWarenkorb(((Kunde) eingeloggterNutzer).getWarenkorb(), nummer);
     }
 
