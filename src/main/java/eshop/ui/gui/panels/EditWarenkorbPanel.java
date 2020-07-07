@@ -18,9 +18,9 @@ import java.io.IOException;
 public class EditWarenkorbPanel extends JPanel {
 
     // Ueber dieses Interface uebermittelt das AddArtikelPanel
-    // ein neu hinzugefuegtes Buch an einen Empfaenger.
-    // In unserem Fall ist der Empfaenger die EshopGuiMitKomponenten,
-    // die dieses Interface implementiert und auf ein neue hinzugefuegtes
+    // ein neu hinzugefuegter Artikel an einen Empfaenger.
+    // In unserem Fall ist der Empfaenger die EshopGui mit Komponenten,
+    // die dieses Interface implementiert und auf ein neuen hinzugefuegten
     // Artikel reagiert, indem sie die Artikelliste aktualisiert.
     public interface EditWarenkorbListener {
         public void onWarenkorbEdited();

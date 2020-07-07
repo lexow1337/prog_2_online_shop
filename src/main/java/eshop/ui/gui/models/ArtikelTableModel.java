@@ -15,7 +15,7 @@ public class ArtikelTableModel extends AbstractTableModel/*DefaultTableModel*/  
 
     public ArtikelTableModel(List<Artikel> aktuelleBuecher) {
         super();
-        // Ich erstelle eine Kopie der Buecherliste,
+        // Ich erstelle eine Kopie der ArtikelListe,
         // damit beim Aktualisieren (siehe Methode setBooks())
         // keine unerwarteten Seiteneffekte entstehen.
         artikel = new Vector<Artikel>();

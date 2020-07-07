@@ -53,13 +53,13 @@ public class EreignisVerwaltung {
         pm.close();
     }
 
-    public boolean erstelleEreignis(Nutzer nutzer, Artikel artikel, int menge, String typ ) {
+    public void erstelleEreignis(Nutzer nutzer, Artikel artikel, int menge, String typ ) {
         String benutzerName = nutzer.getLogin();
         int benutzerNr = nutzer.getNummer();
         int artikelNr = artikel.getArtikelNummer();
         Ereignis ereignis = new Ereignis(typ, artikelNr, menge, benutzerNr, benutzerName);
         ereignisBestand.add(ereignis);
-        return true;
+        System.out.println("Ereignis erstellt.");
     }
 
     public List<Ereignis> gibEreignisListe(){

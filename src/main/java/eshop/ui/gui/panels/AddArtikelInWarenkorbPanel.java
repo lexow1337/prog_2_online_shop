@@ -6,7 +6,10 @@ import eshop.domain.exceptions.ArtikelExistiertNichtException;
 import eshop.domain.exceptions.MassengutZuWenigGUIException;
 import eshop.valueobjects.Artikel;
 
+import eshop.ui.gui.models.ArtikelTableModel;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +25,14 @@ public class AddArtikelInWarenkorbPanel extends JPanel {
     private Shop shop = null;
     private AddArtikelInWarenkorbListener addListener = null;
 
+    public void setNumberTextFieldText(String numberTextField) {
+        this.numberTextField.setText(numberTextField);
+    }
 
     private JButton addButton;
     private JTextField numberTextField = null;
-    private JTextField mengeTextField = null;
+    private JSpinner mengeTextField = null;
+    private ShowArtikelTablePanel artikelPanel;
 
     public AddArtikelInWarenkorbPanel() {
         setupUI();
@@ -48,7 +55,8 @@ public class AddArtikelInWarenkorbPanel extends JPanel {
         this.add(numberTextField);
 
         this.add(new JLabel("Menge:"));
-        mengeTextField = new JTextField(10);
+        mengeTextField = new JSpinner();
+        mengeTextField.setValue(1);
         this.add(mengeTextField);
 
         this.add(new JLabel()); // Abstandshalter
@@ -88,7 +96,7 @@ public class AddArtikelInWarenkorbPanel extends JPanel {
     }
     private void artikelInWarenkorbEinfuegen() throws IOException {
         String nummer = numberTextField.getText();
-        String menge = mengeTextField.getText();
+        String menge = mengeTextField.getValue().toString();
         if(!nummer.isEmpty() && !menge.isEmpty()) {
             try {
                 int nummerAlsInt = Integer.parseInt(nummer);
@@ -98,7 +106,7 @@ public class AddArtikelInWarenkorbPanel extends JPanel {
 
                 addListener.onArtikelAdded(shop.sucheNachNummer(nummerAlsInt));
                 numberTextField.setText("");
-                mengeTextField.setText("");
+                mengeTextField.setValue(0);
             }catch(NumberFormatException nfe) {
                 System.err.println("Bitte eine Zahl als Nummer und Menge angeben!");
             } catch (ArtikelExistiertNichtException e) {

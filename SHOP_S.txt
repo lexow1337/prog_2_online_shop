@@ -33,3 +33,13 @@ Nintendo
 7
 3
 80.0
+Zelda
+Nintendo
+8
+5
+50.0
+Mario Party
+Nintendo
+9
+60
+50.0
