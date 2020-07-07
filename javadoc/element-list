@@ -1,0 +1,9 @@
+eshop.domain
+eshop.domain.exceptions
+eshop.persistence
+eshop.ui.cui
+eshop.ui.gui
+eshop.ui.gui.menus
+eshop.ui.gui.models
+eshop.ui.gui.panels
+eshop.valueobjects
