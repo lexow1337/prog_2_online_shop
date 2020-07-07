@@ -23,7 +23,7 @@ public class AddArtikelPanel extends JPanel {
 
     private JButton addButton;
     private JButton deleteButton;
-    private JTextField numberTextField = null;
+    //private JTextField numberTextField = null;
     private JTextField titleTextField = null;
     private JTextField markeTextField = null;
     private JTextField preisTextField = null;
@@ -45,10 +45,10 @@ public class AddArtikelPanel extends JPanel {
     private void setupUI() {
         int anzahlZeilen = 12;
         setLayout(new GridLayout(0, 2, 0, 0));
-        JLabel label_4 = new JLabel("Nummer:");
-        this.add(label_4);
-        numberTextField = new JTextField();
-        this.add(numberTextField);
+        //JLabel label_4 = new JLabel("Nummer:");
+        //this.add(label_4);
+        //numberTextField = new JTextField();
+        //this.add(numberTextField);
         JLabel label_7 = new JLabel("Marke:");
         this.add(label_7);
         markeTextField = new JTextField();
@@ -144,23 +144,22 @@ public class AddArtikelPanel extends JPanel {
     }
 
     private void artikelEinfuegen() throws IOException {
-        String nummer = numberTextField.getText();
+        //String nummer = numberTextField.getText();
         String titel = titleTextField.getText();
         String marke = markeTextField.getText();
         String preis = preisTextField.getText();
         String bestand = bestandTextField.getText();
         String massengut = massengutTextField.getText();
 
-        if (!nummer.isEmpty() && !titel.isEmpty() && !preis.isEmpty() && !bestand.isEmpty() && !massengut.isEmpty()) {
+        if (!titel.isEmpty() && !preis.isEmpty() && !bestand.isEmpty() && !massengut.isEmpty()) {
             try {
-                int nummerAlsInt = Integer.parseInt(nummer);
                 float preisAlsFloat = Float.parseFloat(preis);
                 int bestandAlsInt = Integer.parseInt(bestand);
                 int massengutAlsInt = Integer.parseInt(massengut);
 
                 Artikel artikel = shop.fuegeArtikelEin(titel, marke, bestandAlsInt, preisAlsFloat);
 
-                numberTextField.setText("");
+                //numberTextField.setText("");
                 titleTextField.setText("");
                 preisTextField.setText("");
                 bestandTextField.setText("");
@@ -176,7 +175,7 @@ public class AddArtikelPanel extends JPanel {
         }else {
 
             JOptionPane.showMessageDialog(this, "Bitte alle Felder ausfuellen!");
-            numberTextField.setText("");
+            //numberTextField.setText("");
             titleTextField.setText("");
             preisTextField.setText("");
             bestandTextField.setText("");

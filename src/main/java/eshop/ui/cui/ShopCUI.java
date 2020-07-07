@@ -176,6 +176,7 @@ public class ShopCUI {
             case "s":
                 shop.schreibeArtikel();
                 shop.schreibeNutzer();
+                shop.schreibeEreignis();
                 System.out.println("Die Artikel und Nutzer wurden gespeichert.");
                 break;
             case "t":

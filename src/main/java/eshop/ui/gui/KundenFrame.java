@@ -27,6 +27,7 @@ import eshop.ui.gui.panels.ShowArtikelTablePanel;
 import eshop.ui.gui.panels.WarenkorbTablePanel;
 import eshop.valueobjects.Artikel;
 import javax.swing.JTabbedPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class KundenFrame extends JFrame implements SearchResultListener, AddArtikelInWarenkorbListener, EditWarenkorbListener, DeleteArtikelInWarenkorbListener {
@@ -98,6 +99,11 @@ public class KundenFrame extends JFrame implements SearchResultListener, AddArti
         // (wahlweise Anzeige als Liste oder Tabelle)
         //booksPanel = new BooksListPanel(artikel);
         artikelPanel = new ShowArtikelTablePanel(artikel);
+        artikelPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
         JScrollPane scrollPaneBestand = new JScrollPane(artikelPanel);
         scrollPaneBestand.setBounds(98, 53, 511, 329);
         panelBestand.add(scrollPaneBestand);
@@ -152,6 +158,14 @@ public class KundenFrame extends JFrame implements SearchResultListener, AddArti
         // TODO: Warenkorb zeugs
         warenkorbPanel.updateArtikelList(eshop.warenkorbAnzeigen());
     }
+
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {
+        int selectedRow = artikelPanel.getSelectedRow();
+        String artikelNumber = artikelPanel.getValueAt(selectedRow, 0).toString();
+        addArtikelInWarenkorbPanel.setNumberTextFieldText(artikelNumber);
+    }
+
 
     /*
      * (non-Javadoc)

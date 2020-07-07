@@ -26,6 +26,7 @@ public class Shop {
 
         meineArtikel = new ShopVerwaltung();
         meineArtikel.liesDaten(datei+"_S.txt");
+
         meinWarenkorb = new WarenkorbVerwaltung(meineArtikel);
 
         meineNutzer = new NutzerVerwaltung();
@@ -136,7 +137,7 @@ public class Shop {
      * @return Artikel
      * @throws ArtikelExistiertBereitsException
      */
-    public Artikel fuegeArtikelEin(String bezeichnung, String marke, int bestand, float preis) throws ArtikelExistiertBereitsException {
+    public Artikel fuegeArtikelEin(String bezeichnung, String marke, int bestand, float preis) throws ArtikelExistiertBereitsException, IOException {
         boolean verfuegbar;
         int nummer = artikelMenge() + 1;
         Artikel a = new Artikel(bezeichnung, marke, nummer, preis, bestand);
@@ -144,6 +145,7 @@ public class Shop {
         meineArtikel.einfuegen(a);
         String typ = "artikeleinfuegen";
         ereignisVw.erstelleEreignis(eingeloggterNutzer, a, bestand, typ);
+        schreibeEreignis();
         return a;
     }
 
@@ -151,13 +153,14 @@ public class Shop {
      * Loescht Artikel aus meineArtikel.
      * @param nummer
      */
-    public void loescheArtikel(int nummer) {
+    public void loescheArtikel(int nummer) throws IOException {
         Artikel a = meineArtikel.sucheArtikelNummer(nummer);
         if (a != null) {
             meineArtikel.loeschen(a);
             int menge = 0;
             String typ = "artikelloeschen";
             ereignisVw.erstelleEreignis(eingeloggterNutzer, a, menge, typ);
+            schreibeEreignis();
         }
     }
 
